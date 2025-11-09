@@ -1,9 +1,21 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link, NavLink } from "react-router";
 import { BiSolidCameraMovie } from "react-icons/bi";
 
 const Navbar = () => {
   let user = 1;
+
+  const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
+
+  useEffect(() => {
+    const html = document.querySelector("html");
+    html.setAttribute("data-theme", theme);
+    localStorage.setItem("theme", theme);
+  }, [theme]);
+
+  const handleTheme = (checked) => {
+    setTheme(checked ? "dark" : "light");
+  };
   const links = (
     <>
       <li>
@@ -48,7 +60,10 @@ const Navbar = () => {
               {links}
             </ul>
           </div>
-          <Link to='/' className="logo text-[14px] sm:text-xl font-semibold flex items-center ">
+          <Link
+            to="/"
+            className="logo text-[14px] sm:text-xl font-semibold flex items-center "
+          >
             <span>M</span>
             <span className="text-[#FF6B6B] animate-bounce">
               <BiSolidCameraMovie size={24} />
@@ -101,6 +116,12 @@ const Navbar = () => {
                 <li>
                   <Link to={"/my-collections"}>Add Movies</Link>
                 </li>
+                <input
+                  onChange={(e) => handleTheme(e.target.checked)}
+                  type="checkbox"
+                  defaultChecked={localStorage.getItem("theme") === "dark"}
+                  className="toggle"
+                />
               </ul>
             </div>{" "}
             <button className="btn btn-outline hover:text-white btn-primary">
