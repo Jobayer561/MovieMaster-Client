@@ -1,0 +1,19 @@
+@import url("https://fonts.googleapis.com/css2?family=Momo+Trust+Display&display=swap");
+
+@import "tailwindcss";
+@plugin "daisyui" {
+  themes: light --default, dark --prefersdark;
+}
+
+.logo {
+  font-family: "Momo Trust Display", sans-serif;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+background: linear-gradient(45deg, #FF512F, #DD2476);
+
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+
