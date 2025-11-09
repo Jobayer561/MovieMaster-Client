@@ -76,10 +76,10 @@ const Navbar = () => {
         </div>
         {!user ? (
           <div className="navbar-end mx-0 md:mx-4 flex gap-2">
-            <button className="btn btn-outline hover:text-white btn-primary">
+            <button className="my-btn">
               Login
             </button>
-            <button className="btn btn-outline hover:text-white btn-primary">
+            <button className="my-btn ">
               Register
             </button>
           </div>
@@ -124,7 +124,7 @@ const Navbar = () => {
                 />
               </ul>
             </div>{" "}
-            <button className="btn btn-outline hover:text-white btn-primary">
+            <button className="my-btn">
               Logout
             </button>
           </div>

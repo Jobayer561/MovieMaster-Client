@@ -1,6 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Momo+Trust+Display&display=swap");
-
 @import "tailwindcss";
+@tailwind utilities;
 @plugin "daisyui" {
   themes: light --default, dark --prefersdark;
 }
@@ -13,7 +13,6 @@
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
-
 a.active {
   color: #ff6b6b;
   text-decoration: underline;
@@ -21,4 +20,11 @@ a.active {
   text-decoration-thickness: 2px;
   font-weight: 700;
   transition: 0.2s ease-in-out;
+}
+
+.my-btn {
+  @apply btn  
+  bg-linear-to-r from-[#ff512f] to-[#dd2476]
+  text-white font-semibold border-none
+  hover:scale-105 transition-transform duration-200;
 }
