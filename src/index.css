@@ -33,3 +33,7 @@ a.active {
   background-clip: text;
   -webkit-text-fill-color: transparent;
 }
+.swiper-button-next,
+.swiper-button-prev {
+  transform: scale(0.4);
+}
