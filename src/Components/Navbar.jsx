@@ -76,12 +76,8 @@ const Navbar = () => {
         </div>
         {!user ? (
           <div className="navbar-end mx-0 md:mx-4 flex gap-2">
-            <button className="my-btn">
-              Login
-            </button>
-            <button className="my-btn ">
-              Register
-            </button>
+            <button className="my-btn">Login</button>
+            <button className="my-btn ">Register</button>
           </div>
         ) : (
           <div className="navbar-end mx-0 md:mx-4 flex gap-2">
@@ -111,10 +107,10 @@ const Navbar = () => {
                 </div>
 
                 <li>
-                  <Link to={"/my-collections"}>My Collections</Link>
+                  <Link to={"/myCollection"}>My Collections</Link>
                 </li>
                 <li>
-                  <Link to={"/my-collections"}>Add Movies</Link>
+                  <Link to={"/"}>Add Movies</Link>
                 </li>
                 <input
                   onChange={(e) => handleTheme(e.target.checked)}
@@ -124,9 +120,7 @@ const Navbar = () => {
                 />
               </ul>
             </div>{" "}
-            <button className="my-btn">
-              Logout
-            </button>
+            <button className="my-btn">Logout</button>
           </div>
         )}
       </div>

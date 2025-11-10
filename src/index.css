@@ -10,7 +10,7 @@
   display: inline-flex;
   align-items: center;
   background: linear-gradient(45deg, #ff512f, #dd2476);
-  -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 a.active {
@@ -27,4 +27,9 @@ a.active {
   bg-linear-to-r from-[#ff512f] to-[#dd2476]
   text-white font-semibold border-none
   hover:scale-105 transition-transform duration-200;
+}
+.primary {
+  background: linear-gradient(45deg, #ff512f, #dd2476);
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
 }

@@ -6,7 +6,7 @@ const AllMoviesCard = ({ movie }) => {
   const { posterUrl, title, genre, releaseYear, rating, plotSummary,_id } = movie;
   return (
     <div>
-      <div className="card bg-base-100 hover:scale-105 transition-transform shadow-md">
+      <div className="card bg-gray-200 hover:scale-105 transition-transform shadow-md">
         <figure className="h-48 overflow-hidden p-5 mt-5 rounded-md">
           <img
             className="w-full h-48 object-cover rounded-md"
