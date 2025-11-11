@@ -6,6 +6,7 @@ import { FaFilm, FaUsers } from "react-icons/fa6";
 import TopRatedMovies from "./TopRatedMovies";
 import LatestMovies from "./LatestMovies";
 import GenreSection from "./GenreSection";
+import AboutPlatform from "./AboutPlatform";
 
 const Home = () => {
   const [stats, setStats] = useState({ totalMovies: 0, totalUsers: 0 });
@@ -52,6 +53,9 @@ const Home = () => {
       <LatestMovies/>
       <div>
         <GenreSection/>
+      </div>
+      <div>
+        <AboutPlatform/>
       </div>
     </div>
   );
