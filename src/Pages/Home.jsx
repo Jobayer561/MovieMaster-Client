@@ -4,6 +4,8 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { FaFilm, FaUsers } from "react-icons/fa6";
 import TopRatedMovies from "./TopRatedMovies";
+import LatestMovies from "./LatestMovies";
+import GenreSection from "./GenreSection";
 
 const Home = () => {
   const [stats, setStats] = useState({ totalMovies: 0, totalUsers: 0 });
@@ -47,6 +49,10 @@ const Home = () => {
         </div>
       </div>
       <TopRatedMovies/>
+      <LatestMovies/>
+      <div>
+        <GenreSection/>
+      </div>
     </div>
   );
 };
