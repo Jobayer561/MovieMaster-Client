@@ -3,7 +3,8 @@ import { FaStar } from "react-icons/fa";
 import { Link } from "react-router";
 
 const AllMoviesCard = ({ movie }) => {
-  const { posterUrl, title, genre, releaseYear, rating, plotSummary,_id } = movie;
+  const { posterUrl, title, genre, releaseYear, rating, plotSummary, _id } =
+    movie;
   return (
     <div>
       <div className="card bg-gray-200 hover:scale-105 transition-transform shadow-md">
@@ -16,7 +17,7 @@ const AllMoviesCard = ({ movie }) => {
         </figure>
         <div className="card-body">
           <div className="flex justify-between">
-            <h2 className="card-title line-clamp-1">{title}</h2>
+            <h2 className="card-title primary line-clamp-1">{title}</h2>
             <div className="badge bg-linear-to-r from-[#7928CA] to-[#FF0080] text-white border-none shadow-md px-3 py-2 font-medium tracking-wide">
               {genre}
             </div>
@@ -31,7 +32,7 @@ const AllMoviesCard = ({ movie }) => {
               {rating}
             </div>
           </div>
-          <Link to={`/movie-details/${_id}`}  className="my-btn mt-5">
+          <Link to={`/movie-details/${_id}`} className="my-btn mt-5">
             View Details
           </Link>
         </div>
