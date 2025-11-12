@@ -1,7 +1,10 @@
 import React from "react";
+import { useState } from "react";
 import { Link } from "react-router";
-
+import { FaEye } from "react-icons/fa";
+import { IoEyeOff } from "react-icons/io5";
 const Login = () => {
+  const [show, setShow] = useState(false);
   return (
     <div
       className="min-h-screen px-4 flex justify-center items-center   bg-linear-to-r from-[#ff512f]/90 via-[#ff2a68] to-[#dd2476]/90
@@ -17,20 +20,27 @@ const Login = () => {
             <label className=" text-gray-500 text-sm  ">Email</label>
             <input
               type="text"
-              placeholder="Enter Your email"
+              placeholder="example@gmail.com"
               required
               className="w-full px-5 py-3 rounded-full bg-white shadow-md focus:outline-none "
             />
           </div>
 
-          <div className="mb-3">
+          <div className="relative mb-3">
             <label className=" text-gray-500 text-sm ">Password</label>
             <input
-              type="password"
-              placeholder="Enter your Password"
+              type={show ? "text" : "password"}
+              name="password"
+              placeholder="••••••••"
               required
               className="w-full px-5 py-3 rounded-full bg-white shadow-md focus:outline-none"
             />
+            <span
+              onClick={() => setShow(!show)}
+              className="absolute right-4 top-10 cursor-pointer "
+            >
+              {show ? <FaEye /> : <IoEyeOff />}
+            </span>
           </div>
 
           <div className="flex justify-between items-center text-sm mb-6">
@@ -50,7 +60,7 @@ const Login = () => {
           </div>
 
           <div className="flex justify-center gap-4">
-            <button className="btn w-full  rounded-full hover:scale-105 transition-transform bg-white text-black border-[#e5e5e5]">
+            <button className="btn w-full h-12 shadow-lg hover:shadow-xl  rounded-full hover:scale-105 transition-transform bg-white text-black border-[#e5e5e5]">
               <svg
                 aria-label="Google logo"
                 width="16"
@@ -85,7 +95,7 @@ const Login = () => {
           <p className="text-center text-gray-500 text-sm mt-6">
             Don't have an account?{" "}
             <Link
-              href="#"
+              to={"/register"}
               className="text-red-500 font-semibold hover:text-orange-500"
             >
               Register

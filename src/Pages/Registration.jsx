@@ -1,7 +1,67 @@
 import React from "react";
-import { Link } from "react-router";
+import { useState } from "react";
+import { FaEye } from "react-icons/fa6";
+import { IoEyeOff } from "react-icons/io5";
+import { Link, useNavigate } from "react-router";
+import { AuthContext } from "../Context/AuthContext";
+import { useContext } from "react";
+import toast from "react-hot-toast";
 
 const Registration = () => {
+  const [show, setShow] = useState(false);
+  const [error, setError] = useState("");
+  const { createUser, setUser } = useContext(AuthContext);
+
+  const navigate = useNavigate();
+
+  const handleRegistration = (e) => {
+    e.preventDefault();
+    const name = e.target.name.value;
+    const photoUrl = e.target.photoURL.value;
+    const email = e.target.email.value;
+    const password = e.target.password.value;
+    console.log(name, photoUrl, email, password);
+    const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z]).{6,}$/;
+    if (!passwordPattern) {
+      setError(
+        "Password Must be 6 character long and must Contain at least one uppercase Letter and one lowercase letter"
+      );
+      return;
+    }
+    setError("");
+    createUser(email, password)
+      .then((res) => {
+        toast.success('Sign Up Successful')
+        console.log(res.user);
+        setUser(null);
+        navigate("/");
+      })
+      .catch((e) => {
+        if (e.code === "auth/email-already-in-use") {
+          toast.error("User already exists in the database.");
+        } else if (e.code === "auth/weak-password") {
+          toast.error(
+            "You password should be 6 character long and must contain one uppercase & lowercase letter"
+          );
+        } else if (e.code === "auth/invalid-email") {
+          toast.error("Invalid email format. Please check your email.");
+        } else if (e.code === "auth/user-not-found") {
+          toast.error("User not found. Please sign up first.");
+        } else if (e.code === "auth/wrong-password") {
+          toast.error("Wrong password. Please try again.");
+        } else if (e.code === "auth/user-disabled") {
+          toast.error("This user account has been disabled.");
+        } else if (e.code === "auth/too-many-requests") {
+          toast.error("Too many attempts. Please try again later.");
+        } else if (e.code === "auth/operation-not-allowed") {
+          toast.error("Operation not allowed. Please contact support.");
+        } else if (e.code === "auth/network-request-failed") {
+          toast.error("Network error. Please check your connection.");
+        } else {
+          toast.error(e.message || "An unexpected error occurred.");
+        }
+      });
+  };
   return (
     <div
       className=" px-4 flex justify-center items-center   bg-linear-to-r from-[#ff512f]/90 via-[#ff2a68] to-[#dd2476]/90
@@ -12,12 +72,13 @@ const Registration = () => {
           <h1 className="text-2xl font-bold mt-2 text-gray-800">Register</h1>
         </div>
 
-        <form>
+        <form onSubmit={handleRegistration}>
           {" "}
           <div className="mb-3 ">
             <label className=" text-gray-500 text-sm  ">Name</label>
             <input
               type="text"
+              name="name"
               placeholder="Enter Your Name"
               required
               className="w-full px-5 py-3 rounded-full bg-white shadow-md focus:outline-none "
@@ -27,6 +88,7 @@ const Registration = () => {
             <label className=" text-gray-500 text-sm  ">PhotoURL</label>
             <input
               type="text"
+              name="photoURL"
               placeholder="Enter Your PhotoURL"
               required
               className="w-full px-5 py-3 rounded-full bg-white shadow-md focus:outline-none "
@@ -36,21 +98,32 @@ const Registration = () => {
             <label className=" text-gray-500 text-sm  ">Email</label>
             <input
               type="text"
-              placeholder="Enter Your email"
+              name="email"
+              placeholder="example@gmail.com"
               required
               className="w-full px-5 py-3 rounded-full bg-white shadow-md focus:outline-none "
             />
           </div>
-          <div className="mb-3">
+          <div className="relative mb-3">
             <label className=" text-gray-500 text-sm ">Password</label>
             <input
-              type="password"
-              placeholder="Enter your Password"
+              type={show ? "text" : "password"}
+              name="password"
+              placeholder="••••••••"
               required
               className="w-full px-5 py-3 rounded-full bg-white shadow-md focus:outline-none"
             />
+            <span
+              onClick={() => setShow(!show)}
+              className="absolute right-4 top-10 cursor-pointer "
+            >
+              {show ? <FaEye /> : <IoEyeOff />}
+            </span>
           </div>
-          <button className="w-full mt-3 py-3 rounded-full bg-linear-to-r from-red-500 to-orange-500 text-white font-semibold   shadow-lg hover:shadow-xl hover:scale-105 ">
+          <button
+            type="submit"
+            className="w-full mt-3 py-3 rounded-full bg-linear-to-r from-red-500 to-orange-500 text-white font-semibold   shadow-lg hover:shadow-xl hover:scale-105 "
+          >
             Register
           </button>
           <div className="flex items-center my-5 text-gray-400 text-sm">
@@ -59,7 +132,7 @@ const Registration = () => {
             <div className="flex-1 h-px bg-gray-300"></div>
           </div>
           <div className="flex justify-center gap-4">
-            <button className="btn w-full  rounded-full hover:scale-105 transition-transform bg-white text-black border-[#e5e5e5]">
+            <button className="btn w-full h-12 shadow-lg hover:shadow-xl  rounded-full hover:scale-105 transition-transform bg-white text-black border-[#e5e5e5]">
               <svg
                 aria-label="Google logo"
                 width="16"
@@ -93,7 +166,7 @@ const Registration = () => {
           <p className="text-center text-gray-500 text-sm mt-6">
             Already have an account?{" "}
             <Link
-              href="#"
+              to={"/login"}
               className="text-red-500 font-semibold hover:text-orange-500"
             >
               Login
