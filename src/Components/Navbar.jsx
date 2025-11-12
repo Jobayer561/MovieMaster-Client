@@ -3,7 +3,7 @@ import { Link, NavLink } from "react-router";
 import { BiSolidCameraMovie } from "react-icons/bi";
 
 const Navbar = () => {
-  let user = 1;
+  let user = 0;
 
   const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
 
@@ -76,8 +76,8 @@ const Navbar = () => {
         </div>
         {!user ? (
           <div className="navbar-end mx-0 md:mx-4 flex gap-2">
-            <button className="my-btn">Login</button>
-            <button className="my-btn ">Register</button>
+            <Link to={'/login'} className="my-btn">Login</Link>
+            <Link to={'/register'} className="my-btn ">Register</Link>
           </div>
         ) : (
           <div className="navbar-end mx-0 md:mx-4 flex gap-2">
