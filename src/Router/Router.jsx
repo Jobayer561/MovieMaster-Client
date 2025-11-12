@@ -6,6 +6,7 @@ import MyCollections from "../Pages/MyCollections";
 import MovieDetails from "../Pages/MovieDetails";
 import Registration from "../Pages/Registration";
 import Login from "../Pages/Login";
+import PrivateRoute from "./PrivateRoute";
 
 export const router = createBrowserRouter([
   {
@@ -22,22 +23,29 @@ export const router = createBrowserRouter([
         loader: () => fetch("http://localhost:3000/movies"),
       },
       {
-           path:'/movie-details/:id',
-           element:<MovieDetails/>
+        path: "/movie-details/:id",
+        element: (
+          <PrivateRoute>
+            <MovieDetails />
+          </PrivateRoute>
+        ),
       },
       {
         path: "/myCollection",
-        element: <MyCollections />,
+        element: (
+          <PrivateRoute>
+            <MyCollections />
+          </PrivateRoute>
+        ),
       },
       {
-        path:'/register',
-        element:<Registration/>
+        path: "/register",
+        element: <Registration />,
       },
       {
-        path:'/login',
-        element:<Login/>
-      }
-       
+        path: "/login",
+        element: <Login />,
+      },
     ],
   },
 ]);

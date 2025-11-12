@@ -1,10 +1,74 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useState } from "react";
-import { Link } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 import { FaEye } from "react-icons/fa";
 import { IoEyeOff } from "react-icons/io5";
+import { AuthContext } from "../Context/AuthContext";
+import toast from "react-hot-toast";
+
 const Login = () => {
   const [show, setShow] = useState(false);
+  const { LoginUser, signInWithGoogle, setUser, setLoading } =
+    useContext(AuthContext);
+  const location = useLocation();
+  const from = location.state || "/";
+  const navigate = useNavigate();
+
+
+  const handleLogin = (e) => {
+    e.preventDefault();
+    const email = e.target.email.value;
+    const password = e.target.password.value;
+    toast.loading('Logging In User')
+    LoginUser(email, password)
+      .then((res) => {
+        console.log(res);
+        setUser(res.user);
+        toast.dismiss()
+        toast.success("Signin successful");
+        e.target.reset();
+        navigate(from);
+      })
+      .catch((err) => {
+        console.log(err);
+        toast.dismiss();
+        toast.error(err.message);
+      });
+  };
+ const handleGoogleSignin = () => {
+   setLoading(true);
+   signInWithGoogle()
+     .then((result) => {
+       const newUser = {
+         name: result.user.displayName,
+         email: result.user.email,
+         image: result.user.photoURL,
+       };
+
+       fetch("http://localhost:3000/users", {
+         method: "POST",
+         headers: {
+           "Content-Type": "application/json",
+         },
+         body: JSON.stringify(newUser),
+       })
+         .then((res) => res.json())
+         .then((data) => {
+           console.log("User saved in DB", data);
+           setUser(result.user);
+           toast.dismiss();
+           toast.success("Google Sign-in successful");
+           navigate(from);
+           setLoading(false);
+         });
+     })
+     .catch((error) => {
+       console.log(error);
+       toast.dismiss();
+       toast.error(error.message);
+       setLoading(false);
+     });
+ };
   return (
     <div
       className="min-h-screen px-4 flex justify-center items-center   bg-linear-to-r from-[#ff512f]/90 via-[#ff2a68] to-[#dd2476]/90
@@ -15,11 +79,12 @@ const Login = () => {
           <h1 className="text-2xl font-bold mt-2 text-gray-800">Login</h1>
         </div>
 
-        <form>
+        <form onSubmit={handleLogin}>
           <div className="mb-3 ">
             <label className=" text-gray-500 text-sm  ">Email</label>
             <input
               type="text"
+              name="email"
               placeholder="example@gmail.com"
               required
               className="w-full px-5 py-3 rounded-full bg-white shadow-md focus:outline-none "
@@ -49,7 +114,10 @@ const Login = () => {
             </a>
           </div>
 
-          <button className="w-full py-3 rounded-full bg-linear-to-r from-red-500 to-orange-500 text-white font-semibold   shadow-lg hover:shadow-xl hover:scale-105 ">
+          <button
+            type="submit"
+            className="w-full py-3 rounded-full bg-linear-to-r from-red-500 to-orange-500 text-white font-semibold   shadow-lg hover:shadow-xl hover:scale-105 "
+          >
             Login
           </button>
 
@@ -60,7 +128,10 @@ const Login = () => {
           </div>
 
           <div className="flex justify-center gap-4">
-            <button className="btn w-full h-12 shadow-lg hover:shadow-xl  rounded-full hover:scale-105 transition-transform bg-white text-black border-[#e5e5e5]">
+            <button
+              onClick={handleGoogleSignin}
+              className="btn w-full h-12 shadow-lg hover:shadow-xl  rounded-full hover:scale-105 transition-transform bg-white text-black border-[#e5e5e5]"
+            >
               <svg
                 aria-label="Google logo"
                 width="16"

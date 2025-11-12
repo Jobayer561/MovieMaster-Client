@@ -17,7 +17,7 @@ const Home = () => {
         console.log("Stats response:", data);
         setStats({
           totalMovies: data.totalMovies,
-          totalUsers: 0,
+          totalUsers: data.totalUsers,
         });
       });
   }, []);
@@ -44,18 +44,18 @@ const Home = () => {
             </div>
             <div>
               <p className="text-sm text-gray-400">Total Users</p>
-              <h2 className="text-3xl font-bold">0</h2>
+              <h2 className="text-3xl font-bold">{stats.totalUsers}</h2>
             </div>
           </div>
         </div>
       </div>
-      <TopRatedMovies/>
-      <LatestMovies/>
+      <TopRatedMovies />
+      <LatestMovies />
       <div>
-        <GenreSection/>
+        <GenreSection />
       </div>
       <div>
-        <AboutPlatform/>
+        <AboutPlatform />
       </div>
     </div>
   );

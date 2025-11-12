@@ -2,7 +2,7 @@ import React from "react";
 import { useState } from "react";
 import { FaEye } from "react-icons/fa6";
 import { IoEyeOff } from "react-icons/io5";
-import { Link, useNavigate } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 import { AuthContext } from "../Context/AuthContext";
 import { useContext } from "react";
 import toast from "react-hot-toast";
@@ -10,58 +10,110 @@ import toast from "react-hot-toast";
 const Registration = () => {
   const [show, setShow] = useState(false);
   const [error, setError] = useState("");
-  const { createUser, setUser } = useContext(AuthContext);
-
+  const { createUser, setUser, signInWithGoogle, updateProfileFunc ,setLoading} =
+    useContext(AuthContext);
+  const location = useLocation();
+  const from = location.state || "/";
   const navigate = useNavigate();
+const handleRegistration = (e) => {
+  e.preventDefault();
 
-  const handleRegistration = (e) => {
-    e.preventDefault();
-    const name = e.target.name.value;
-    const photoUrl = e.target.photoURL.value;
-    const email = e.target.email.value;
-    const password = e.target.password.value;
-    console.log(name, photoUrl, email, password);
-    const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z]).{6,}$/;
-    if (!passwordPattern) {
-      setError(
-        "Password Must be 6 character long and must Contain at least one uppercase Letter and one lowercase letter"
-      );
-      return;
-    }
-    setError("");
-    createUser(email, password)
-      .then((res) => {
-        toast.success('Sign Up Successful')
-        console.log(res.user);
-        setUser(null);
-        navigate("/");
+  const name = e.target.name.value;
+  const email = e.target.email.value;
+  const photoUrl = e.target.photoURL.value;
+  const password = e.target.password.value;
+  const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z]).{6,}$/;
+  if (!passwordPattern.test(password)) {
+    setError(
+      "Password must be at least 6 characters long and include one uppercase and one lowercase letter."
+    );
+    return;
+  }
+  setError("");
+  toast.loading("Registering user...");
+  createUser(email, password)
+    .then(() => updateProfileFunc(name, photoUrl))
+    .then(() => {
+      const userInfo = {
+        name,
+        email,
+        image: photoUrl,
+      };
+      fetch("http://localhost:3000/users", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(userInfo),
       })
-      .catch((e) => {
-        if (e.code === "auth/email-already-in-use") {
-          toast.error("User already exists in the database.");
-        } else if (e.code === "auth/weak-password") {
-          toast.error(
-            "You password should be 6 character long and must contain one uppercase & lowercase letter"
-          );
-        } else if (e.code === "auth/invalid-email") {
-          toast.error("Invalid email format. Please check your email.");
-        } else if (e.code === "auth/user-not-found") {
-          toast.error("User not found. Please sign up first.");
-        } else if (e.code === "auth/wrong-password") {
-          toast.error("Wrong password. Please try again.");
-        } else if (e.code === "auth/user-disabled") {
-          toast.error("This user account has been disabled.");
-        } else if (e.code === "auth/too-many-requests") {
-          toast.error("Too many attempts. Please try again later.");
-        } else if (e.code === "auth/operation-not-allowed") {
-          toast.error("Operation not allowed. Please contact support.");
-        } else if (e.code === "auth/network-request-failed") {
-          toast.error("Network error. Please check your connection.");
-        } else {
-          toast.error(e.message || "An unexpected error occurred.");
-        }
-      });
+        .then((res) => res.json())
+        .then((data) => {
+          console.log("User saved:", data);
+          setUser({ displayName: name, email, photoURL: photoUrl });
+          toast.dismiss();
+          toast.success("Registration successful!");
+          e.target.reset();
+          navigate("/");
+        });
+    })
+  .catch((e) => {
+    toast.dismiss();
+    setLoading(false)
+    if (e.code === "auth/email-already-in-use") {
+      toast.error("User already exists in the database.");
+    } 
+     else if (e.code === "auth/invalid-email") {
+      toast.error("Invalid email format. Please check your email.");
+    } else if (e.code === "auth/user-not-found") {
+      toast.error("User not found. Please sign up first.");
+    } else if (e.code === "auth/wrong-password") {
+      toast.error("Wrong password. Please try again.");
+    } else if (e.code === "auth/user-disabled") {
+      toast.error("This user account has been disabled.");
+    } else if (e.code === "auth/too-many-requests") {
+      toast.error("Too many attempts. Please try again later.");
+    } else if (e.code === "auth/operation-not-allowed") {
+      toast.error("Operation not allowed. Please contact support.");
+    } else if (e.code === "auth/network-request-failed") {
+      toast.error("Network error. Please check your connection.");
+    } else {
+      toast.error(e.message || "An unexpected error occurred.");
+    }
+  });
   };
+const handleGoogleSignin = () => {
+  setLoading(true);
+  signInWithGoogle()
+    .then((result) => {
+      const newUser = {
+        name: result.user.displayName,
+        email: result.user.email,
+        image: result.user.photoURL,
+      };
+
+      fetch("http://localhost:3000/users", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newUser),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          console.log("User saved in DB", data);
+          setUser(result.user);
+          toast.dismiss();
+          toast.success("Google Sign-in successful");
+          navigate(from);
+          setLoading(false); 
+        });
+    })
+    .catch((error) => {
+      console.log(error);
+      toast.dismiss();
+      toast.error(error.message);
+      setLoading(false); 
+    });
+};
+
   return (
     <div
       className=" px-4 flex justify-center items-center   bg-linear-to-r from-[#ff512f]/90 via-[#ff2a68] to-[#dd2476]/90
@@ -132,7 +184,10 @@ const Registration = () => {
             <div className="flex-1 h-px bg-gray-300"></div>
           </div>
           <div className="flex justify-center gap-4">
-            <button className="btn w-full h-12 shadow-lg hover:shadow-xl  rounded-full hover:scale-105 transition-transform bg-white text-black border-[#e5e5e5]">
+            <button
+              onClick={handleGoogleSignin}
+              className="btn w-full h-12 shadow-lg hover:shadow-xl  rounded-full hover:scale-105 transition-transform bg-white text-black border-[#e5e5e5]"
+            >
               <svg
                 aria-label="Google logo"
                 width="16"
@@ -172,6 +227,8 @@ const Registration = () => {
               Login
             </Link>
           </p>
+       
+          {error && <p className="text-red-600 my-2">{error}</p>}
         </form>
       </div>
     </div>

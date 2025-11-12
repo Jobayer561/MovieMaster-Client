@@ -1,10 +1,21 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link, NavLink } from "react-router";
 import { BiSolidCameraMovie } from "react-icons/bi";
+import { AuthContext } from "../Context/AuthContext";
+import toast from "react-hot-toast";
 
 const Navbar = () => {
-  let user = 0;
-
+  const { user, signOutUser, setUser } = useContext(AuthContext);
+  const handleSignout = () => {
+    signOutUser()
+      .then(() => {
+        toast.success("Signout successful");
+        setUser(null);
+      })
+      .catch((e) => {
+        toast.error(e.message);
+      });
+  };
   const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
 
   useEffect(() => {
@@ -25,9 +36,11 @@ const Navbar = () => {
         <NavLink to="/allMovies">All Movies</NavLink>
       </li>
       <>
-        <li>
-          <NavLink to="/myCollection">My Collections</NavLink>
-        </li>
+        {user && (
+          <li>
+            <NavLink to="/myCollection">My Collections</NavLink>
+          </li>
+        )}
       </>
     </>
   );
@@ -76,8 +89,12 @@ const Navbar = () => {
         </div>
         {!user ? (
           <div className="navbar-end mx-0 md:mx-4 flex gap-2">
-            <Link to={'/login'} className="my-btn">Login</Link>
-            <Link to={'/register'} className="my-btn ">Register</Link>
+            <Link to={"/login"} className="my-btn">
+              Login
+            </Link>
+            <Link to={"/register"} className="my-btn ">
+              Register
+            </Link>
           </div>
         ) : (
           <div className="navbar-end mx-0 md:mx-4 flex gap-2">
@@ -92,6 +109,7 @@ const Navbar = () => {
                     alt="Tailwind CSS Navbar component"
                     referrerPolicy="no-referrer"
                     src={
+                      user?.photoURL ||
                       "https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
                     }
                   />
@@ -102,8 +120,8 @@ const Navbar = () => {
                 className="ml-4 menu  menu-sm dropdown-content bg-base-100 rounded-box z-50 mt-3 w-44 p-2 shadow "
               >
                 <div className=" pb-3 border-b border-b-gray-200">
-                  <li className="text-sm font-bold">Jobayer</li>
-                  <li className="text-xs">jobayer3085@gmail.com</li>
+                  <li className="text-sm font-bold">{user?.displayName}</li>
+                  <li className="text-xs">{user?.email}</li>
                 </div>
 
                 <li>
@@ -120,7 +138,9 @@ const Navbar = () => {
                 />
               </ul>
             </div>{" "}
-            <button className="my-btn">Logout</button>
+            <button onClick={handleSignout} className="my-btn">
+              Logout
+            </button>
           </div>
         )}
       </div>
