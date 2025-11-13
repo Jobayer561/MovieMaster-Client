@@ -1,12 +1,14 @@
 import React, { use, useEffect, useState } from "react";
-import { useParams } from "react-router";
+import { Link, useNavigate, useParams } from "react-router";
 import { LiaEditSolid } from "react-icons/lia";
 import { MdDelete } from "react-icons/md";
 import { AuthContext } from "../Context/AuthContext";
+import Swal from "sweetalert2";
 const MovieDetails = () => {
   const { id } = useParams();
   const [movie, setMovie] = useState({});
   const { user } = use(AuthContext);
+  const navigate = useNavigate();
   useEffect(() => {
     fetch(`http://localhost:3000/movies/${id}`)
       .then((res) => res.json())
@@ -14,6 +16,41 @@ const MovieDetails = () => {
         setMovie(data.result);
       });
   }, [id]);
+
+  const handleDelete = () => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        fetch(`http://localhost:3000/movies/${movie._id}`, {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            console.log(data);
+            navigate("/allMovies");
+
+            Swal.fire({
+              title: "Deleted!",
+              text: "Movie has been deleted.",
+              icon: "success",
+            });
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      }
+    });
+  };
   return (
     <div className="bg-[#170F29]">
       <div className="max-w-[1440px]  mx-auto px-4 py-8  text-gray-900 ">
@@ -76,11 +113,11 @@ const MovieDetails = () => {
 
             {user?.email === movie?.addedBy && (
               <div className="mt-10 flex justify-center gap-4">
-                <button className="my-btn">
+                <Link to={`/movies/update/${movie._id} `} className="my-btn">
                   <LiaEditSolid className="text-xl" />
                   Edit
-                </button>
-                <button className="my-btn">
+                </Link>
+                <button onClick={handleDelete} className="my-btn">
                   <MdDelete className="text-xl" />
                   Delete
                 </button>

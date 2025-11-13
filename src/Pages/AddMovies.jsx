@@ -64,7 +64,7 @@ const AddMovieForm = () => {
                 name="title"
                 required
                 placeholder="Enter Movie Title"
-                className="input input-info bg-[#111]"
+                className="input input-info bg-[#111] autofill:bg-[#111]"
               />
             </div>
             <div>
@@ -74,7 +74,7 @@ const AddMovieForm = () => {
                 name="director"
                 required
                 placeholder="Enter Director Name"
-                className="input input-info bg-[#111]"
+                className="input input-info bg-[#111] autofill:bg-[#111]"
               />
             </div>
           </div>
@@ -85,7 +85,7 @@ const AddMovieForm = () => {
                 defaultValue=""
                 name="genre"
                 required
-                className="select select-info appearance-none bg-[#111]"
+                className="select select-info appearance-none bg-[#111] autofill:bg-[#111]"
               >
                 <option value="" disabled>
                   Select a Genre
@@ -111,7 +111,7 @@ const AddMovieForm = () => {
                 name="releaseYear"
                 required
                 placeholder="Enter Release Year"
-                className="input input-info bg-[#111]"
+                className="input input-info bg-[#111] autofill:bg-[#111]"
               />
             </div>
           </div>
@@ -128,7 +128,7 @@ const AddMovieForm = () => {
                 step="0.1"
                 required
                 placeholder="Enter Rating"
-                className="input input-info bg-[#111]"
+                className="input input-info bg-[#111] autofill:bg-[#111]"
               />
             </div>
             <div>
@@ -140,7 +140,7 @@ const AddMovieForm = () => {
                 name="duration"
                 required
                 placeholder="0"
-                className="input input-info bg-[#111]"
+                className="input input-info bg-[#111] autofill:bg-[#111]"
               />
             </div>
           </div>
@@ -151,7 +151,7 @@ const AddMovieForm = () => {
                 defaultValue=""
                 name="language"
                 required
-                className="select select-info appearance-none bg-[#111]"
+                className="select select-info appearance-none bg-[#111] autofill:bg-[#111]"
               >
                 <option disabled>Language</option>
                 <option>English</option>
@@ -171,7 +171,7 @@ const AddMovieForm = () => {
                 name="country"
                 required
                 placeholder="USA"
-                className="input input-info bg-[#111]"
+                className="input input-info bg-[#111] autofill:bg-[#111]"
               />
             </div>
           </div>
@@ -184,7 +184,7 @@ const AddMovieForm = () => {
               name="cast"
               required
               placeholder="Leonardo DiCaprio, Joseph Gordon-Levitt, Ellen Page"
-              className="input input-info bg-[#111] w-[97%]"
+              className="input input-info bg-[#111] autofill:bg-[#111] w-[97%]"
             />
           </div>
           <div>
@@ -207,7 +207,7 @@ const AddMovieForm = () => {
               name="summary"
               required
               placeholder="Enter a brief plot summary..."
-              className="w-[97%] bg-[#111]  textarea textarea-info resize-none "
+              className="w-[97%] bg-[#111] autofill:bg-[#111] textarea textarea-info resize-none "
             ></textarea>
           </div>
 

@@ -3,6 +3,8 @@ import { FaStar } from "react-icons/fa";
 import { Link } from "react-router";
 
 const AllMoviesCard = ({ movie }) => {
+  
+
   const { posterUrl, title, genre, releaseYear, rating, plotSummary, _id } =
     movie;
   return (
@@ -27,7 +29,7 @@ const AllMoviesCard = ({ movie }) => {
             <div className="badge bg-linear-to-r from-indigo-500 to-purple-500 text-white border-none">
               {releaseYear}
             </div>
-            <div className="badge flex items-center gap-1 bg-linear-to-r from-yellow-400 to-orange-400 text-white text-black border-none">
+            <div className="badge flex items-center gap-1 bg-linear-to-r from-yellow-400 to-orange-400 text-white  border-none">
               <FaStar className="text-yellow-700" />
               {rating}
             </div>
