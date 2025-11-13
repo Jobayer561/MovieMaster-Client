@@ -1,11 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { use, useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { LiaEditSolid } from "react-icons/lia";
 import { MdDelete } from "react-icons/md";
+import { AuthContext } from "../Context/AuthContext";
 const MovieDetails = () => {
   const { id } = useParams();
   const [movie, setMovie] = useState({});
-
+  const { user } = use(AuthContext);
   useEffect(() => {
     fetch(`http://localhost:3000/movies/${id}`)
       .then((res) => res.json())
@@ -73,16 +74,18 @@ const MovieDetails = () => {
               </p>
             </div>
 
-            <div className="mt-10 flex justify-center gap-4">
-              <button className="my-btn">
-                <LiaEditSolid className="text-xl" />
-                Edit
-              </button>
-              <button className="my-btn">
-                <MdDelete className="text-xl" />
-                Delete
-              </button>
-            </div>
+            {user?.email === movie?.addedBy && (
+              <div className="mt-10 flex justify-center gap-4">
+                <button className="my-btn">
+                  <LiaEditSolid className="text-xl" />
+                  Edit
+                </button>
+                <button className="my-btn">
+                  <MdDelete className="text-xl" />
+                  Delete
+                </button>
+              </div>
+            )}
           </div>
         </div>
       </div>

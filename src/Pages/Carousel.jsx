@@ -17,7 +17,7 @@ const Carousel = () => {
   }, []);
 
   return (
-    <div className="bg-[#170F29]">
+    <div className="">
       <div className="max-w-7xl mx-auto px-4 flex items-center justify-center">
         <Swiper
           modules={[Navigation, Pagination, Autoplay]}
