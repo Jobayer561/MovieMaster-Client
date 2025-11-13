@@ -8,9 +8,9 @@ const AllMoviesCard = ({ movie }) => {
   return (
     <div>
       <div className="card bg-gray-200 hover:scale-105 transition-transform shadow-md">
-        <figure className="h-48 overflow-hidden p-5 mt-5 rounded-md">
+        <figure className="h-48 overflow-hidden   rounded-t-md">
           <img
-            className="w-full h-48 object-cover rounded-md"
+            className="w-full h-48 object-cover rounded-t-md hover:scale-105"
             src={posterUrl}
             alt="PosterUrl"
           />
@@ -27,7 +27,7 @@ const AllMoviesCard = ({ movie }) => {
             <div className="badge bg-linear-to-r from-indigo-500 to-purple-500 text-white border-none">
               {releaseYear}
             </div>
-            <div className="badge flex items-center gap-1 bg-linear-to-r from-yellow-400 to-orange-400 text-black border-none">
+            <div className="badge flex items-center gap-1 bg-linear-to-r from-yellow-400 to-orange-400 text-white text-black border-none">
               <FaStar className="text-yellow-700" />
               {rating}
             </div>

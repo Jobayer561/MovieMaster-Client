@@ -37,9 +37,14 @@ const Navbar = () => {
       </li>
       <>
         {user && (
-          <li>
-            <NavLink to="/myCollection">My Collections</NavLink>
-          </li>
+          <>
+            <li>
+              <NavLink to="/myCollection">My Collections</NavLink>
+            </li>
+            <li>
+              <NavLink to="/addMovies">Add Movies</NavLink>
+            </li>
+          </>
         )}
       </>
     </>
@@ -124,12 +129,18 @@ const Navbar = () => {
                   <li className="text-xs">{user?.email}</li>
                 </div>
 
-                <li>
-                  <Link to={"/myCollection"}>My Collections</Link>
-                </li>
-                <li>
-                  <Link to={"/"}>Add Movies</Link>
-                </li>
+                <>
+                  {user && (
+                    <>
+                      <li>
+                        <NavLink to="/myCollection">My Collections</NavLink>
+                      </li>
+                      <li>
+                        <NavLink to="/addMovies">Add Movies</NavLink>
+                      </li>
+                    </>
+                  )}
+                </>
                 <input
                   onChange={(e) => handleTheme(e.target.checked)}
                   type="checkbox"

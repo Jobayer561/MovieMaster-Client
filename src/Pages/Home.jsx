@@ -7,7 +7,6 @@ import TopRatedMovies from "./TopRatedMovies";
 import LatestMovies from "./LatestMovies";
 import GenreSection from "./GenreSection";
 import AboutPlatform from "./AboutPlatform";
-
 const Home = () => {
   const [stats, setStats] = useState({ totalMovies: 0, totalUsers: 0 });
   useEffect(() => {
