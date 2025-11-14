@@ -38,10 +38,10 @@ const WatchListCard = ({ movie, removeMovie }) => {
   };
   return (
     <div className="max-w-7xl mx-auto">
-      <div className="card bg-gray-200 hover:scale-105 transition-transform shadow-md">
-        <figure className="h-48 overflow-hidden   rounded-t-md">
+      <div className="card border border-gray-200 hover:scale-105 transition-transform shadow-md">
+        <figure className="h-52 md:h-64 overflow-hidden   rounded-t-md">
           <img
-            className="w-full h-48 object-cover rounded-t-md hover:scale-105"
+            className="w-full h-52 md:h-64 object-cover rounded-t-md hover:scale-105"
             src={posterUrl}
             alt="PosterUrl"
           />
@@ -53,7 +53,7 @@ const WatchListCard = ({ movie, removeMovie }) => {
               {genre}
             </div>
           </div>{" "}
-          <p className="line-clamp-2 text-sm text-gray-600">{plotSummary}</p>
+          <p className="line-clamp-2 text-sm text-gray-500">{plotSummary}</p>
           <div className="card-actions justify-end mt-auto">
             <div className="badge bg-linear-to-r from-indigo-500 to-purple-500 text-white border-none">
               {releaseYear}

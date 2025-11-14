@@ -14,17 +14,16 @@ const Login = () => {
   const from = location.state || "/";
   const navigate = useNavigate();
 
-
   const handleLogin = (e) => {
     e.preventDefault();
     const email = e.target.email.value;
     const password = e.target.password.value;
-    toast.loading('Logging In User')
+    toast.loading("Logging In User");
     LoginUser(email, password)
       .then((res) => {
         console.log(res);
         setUser(res.user);
-        toast.dismiss()
+        toast.dismiss();
         toast.success("Signin successful");
         e.target.reset();
         navigate(from);
@@ -35,46 +34,46 @@ const Login = () => {
         toast.error(err.message);
       });
   };
- const handleGoogleSignin = () => {
-   setLoading(true);
-   signInWithGoogle()
-     .then((result) => {
-       const newUser = {
-         name: result.user.displayName,
-         email: result.user.email,
-         image: result.user.photoURL,
-       };
+  const handleGoogleSignin = () => {
+    setLoading(true);
+    signInWithGoogle()
+      .then((result) => {
+        const newUser = {
+          name: result.user.displayName,
+          email: result.user.email,
+          image: result.user.photoURL,
+        };
 
-       fetch("http://localhost:3000/users", {
-         method: "POST",
-         headers: {
-           "Content-Type": "application/json",
-         },
-         body: JSON.stringify(newUser),
-       })
-         .then((res) => res.json())
-         .then((data) => {
-           console.log("User saved in DB", data);
-           setUser(result.user);
-           toast.dismiss();
-           toast.success("Google Sign-in successful");
-           navigate(from);
-           setLoading(false);
-         });
-     })
-     .catch((error) => {
-       console.log(error);
-       toast.dismiss();
-       toast.error(error.message);
-       setLoading(false);
-     });
- };
+        fetch("http://localhost:3000/users", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(newUser),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            console.log("User saved in DB", data);
+            setUser(result.user);
+            toast.dismiss();
+            toast.success("Google Sign-in successful");
+            navigate(from);
+            setLoading(false);
+          });
+      })
+      .catch((error) => {
+        console.log(error);
+        toast.dismiss();
+        toast.error(error.message);
+        setLoading(false);
+      });
+  };
   return (
     <div
       className="min-h-screen px-4 flex justify-center items-center   bg-linear-to-r from-[#ff512f]/90 via-[#ff2a68] to-[#dd2476]/90
  animate-gradient"
     >
-      <div className="bg-white/90 w-[450px] p-6 rounded-2xl shadow-2xl  border border-white/20">
+      <div className="w-[450px] p-6 rounded-2xl shadow-2xl  border border-white/20">
         <div className="text-center mb-3">
           <h1 className="text-2xl font-bold mt-2 text-gray-800">Login</h1>
         </div>
@@ -87,7 +86,7 @@ const Login = () => {
               name="email"
               placeholder="example@gmail.com"
               required
-              className="w-full px-5 py-3 rounded-full bg-white shadow-md focus:outline-none "
+              className="w-full px-5 py-3 rounded-full  shadow-md focus:outline-none "
             />
           </div>
 
@@ -98,7 +97,7 @@ const Login = () => {
               name="password"
               placeholder="••••••••"
               required
-              className="w-full px-5 py-3 rounded-full bg-white shadow-md focus:outline-none"
+              className="w-full px-5 py-3 rounded-full  shadow-md focus:outline-none"
             />
             <span
               onClick={() => setShow(!show)}
@@ -130,7 +129,7 @@ const Login = () => {
           <div className="flex justify-center gap-4">
             <button
               onClick={handleGoogleSignin}
-              className="btn w-full h-12 shadow-lg hover:shadow-xl  rounded-full hover:scale-105 transition-transform bg-white text-black border-[#e5e5e5]"
+              className="btn w-full h-12 shadow-lg hover:shadow-xl  rounded-full hover:scale-105 transition-transform  text-black border-[#e5e5e5]"
             >
               <svg
                 aria-label="Google logo"

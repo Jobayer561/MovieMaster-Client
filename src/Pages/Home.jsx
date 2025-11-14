@@ -21,12 +21,12 @@ const Home = () => {
       });
   }, []);
   return (
-    <div className="bg-white">
+    <div className="">
       <div className="">
         <Carousel />
       </div>
       <div className="">
-        <div className=" text-white p-6 rounded-lg flex flex-col md:flex-row gap-6 justify-center items-center">
+        <div className=" text-white p-6 rounded-lg flex flex-col sm:flex-row gap-6 justify-center items-center mt-4">
           <div className="bg-[#170F29] flex items-center gap-4 p-6 rounded-md w-64 shadow-md border border-violet-900/80 hover:scale-105 transition-transform">
             <div className="bg-[#2c2c2c] p-3 rounded-md">
               <FaFilm className="text-yellow-400 text-2xl" />

@@ -39,19 +39,19 @@ const AddMovieForm = () => {
       });
   };
   return (
-    <div className=" bg-white text-gray-200 flex flex-col items-center justify-center p-6">
+    <div className="  text-gray-200 flex flex-col items-center justify-center p-6">
       <div className="flex flex-col items-center mb-8">
-        <div className="bg-orange-500 p-4 rounded-full mb-4">
-          <span className="text-4xl primary">
+        <div className="bg-orange-500 animate-spin p-4 rounded-full mb-4">
+          <span className="text-4xl  primary">
             <RiMovie2AiFill />
           </span>
         </div>
-        <h1 className="text-3xl font-bold text-orange-300">Add New Movie</h1>
-        <p className="text-gray-300 text-center mt-2">
+        <h1 className="text-3xl font-bold primary">Add New Movie</h1>
+        <p className="text-gray-500 text-center mt-2">
           Fill in the details to add a movie to your collection
         </p>
       </div>
-      <div className="bg-gray-600 rounded-2xl p-8 shadow-lg w-full max-w-3xl">
+      <div className="bg-gray-700 rounded-2xl p-8 shadow-lg w-full max-w-3xl">
         <form onSubmit={handleSubmit} className="space-y-5">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
@@ -64,7 +64,7 @@ const AddMovieForm = () => {
                 name="title"
                 required
                 placeholder="Enter Movie Title"
-                className="input input-info bg-[#111] autofill:bg-[#111]"
+                className="input input-info w-full  bg-[#111] autofill:bg-[#111]"
               />
             </div>
             <div>
@@ -74,18 +74,18 @@ const AddMovieForm = () => {
                 name="director"
                 required
                 placeholder="Enter Director Name"
-                className="input input-info bg-[#111] autofill:bg-[#111]"
+                className="input input-info w-full bg-[#111] autofill:bg-[#111]"
               />
             </div>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
               <label className="block mb-1 text-sm font-medium">Genre</label>
               <select
                 defaultValue=""
                 name="genre"
                 required
-                className="select select-info appearance-none bg-[#111] autofill:bg-[#111]"
+                className="select select-info appearance-none w-full bg-[#111] autofill:bg-[#111]"
               >
                 <option value="" disabled>
                   Select a Genre
@@ -99,6 +99,8 @@ const AddMovieForm = () => {
                 <option>Biography</option>
                 <option>Crime</option>
                 <option>Family</option>
+                <option>Romance</option>
+                <option>Thriller</option>
                 <option>Other</option>
               </select>
             </div>
@@ -111,7 +113,7 @@ const AddMovieForm = () => {
                 name="releaseYear"
                 required
                 placeholder="Enter Release Year"
-                className="input input-info bg-[#111] autofill:bg-[#111]"
+                className="input input-info w-full bg-[#111] autofill:bg-[#111]"
               />
             </div>
           </div>
@@ -128,7 +130,7 @@ const AddMovieForm = () => {
                 step="0.1"
                 required
                 placeholder="Enter Rating"
-                className="input input-info bg-[#111] autofill:bg-[#111]"
+                className="input input-info w-full bg-[#111] autofill:bg-[#111]"
               />
             </div>
             <div>
@@ -140,7 +142,7 @@ const AddMovieForm = () => {
                 name="duration"
                 required
                 placeholder="0"
-                className="input input-info bg-[#111] autofill:bg-[#111]"
+                className="input input-info w-full bg-[#111] autofill:bg-[#111]"
               />
             </div>
           </div>
@@ -151,7 +153,7 @@ const AddMovieForm = () => {
                 defaultValue=""
                 name="language"
                 required
-                className="select select-info appearance-none bg-[#111] autofill:bg-[#111]"
+                className="select select-info w-full appearance-none bg-[#111] autofill:bg-[#111]"
               >
                 <option disabled>Language</option>
                 <option>English</option>
@@ -171,7 +173,7 @@ const AddMovieForm = () => {
                 name="country"
                 required
                 placeholder="USA"
-                className="input input-info bg-[#111] autofill:bg-[#111]"
+                className="input input-info w-full bg-[#111] autofill:bg-[#111]"
               />
             </div>
           </div>
@@ -184,7 +186,7 @@ const AddMovieForm = () => {
               name="cast"
               required
               placeholder="Leonardo DiCaprio, Joseph Gordon-Levitt, Ellen Page"
-              className="input input-info bg-[#111] autofill:bg-[#111] w-[97%]"
+              className="input input-info w-full bg-[#111] autofill:bg-[#111] "
             />
           </div>
           <div>
@@ -194,7 +196,7 @@ const AddMovieForm = () => {
               name="posterUrl"
               required
               placeholder="https://example.com/poster.jpg"
-              className="input input-info bg-[#111] autofill:bg-[#111] w-[97%]"
+              className="input input-info bg-[#111] autofill:bg-[#111] w-full"
             />
           </div>
 
@@ -207,13 +209,13 @@ const AddMovieForm = () => {
               name="summary"
               required
               placeholder="Enter a brief plot summary..."
-              className="w-[97%] bg-[#111] autofill:bg-[#111] textarea textarea-info resize-none "
+              className="w-full bg-[#111] autofill:bg-[#111] textarea textarea-info resize-none "
             ></textarea>
           </div>
 
           <button
             type="submit"
-            className="w-[97%] bg-linear-to-r from-[#ff512f] to-[#dd2476] text-white font-semibold rounded-lg py-2 mt-4 hover:scale-105 transition-transform"
+            className="w-full bg-linear-to-r from-[#ff512f] to-[#dd2476] text-white font-semibold rounded-lg py-2 mt-4 hover:scale-105 transition-transform"
           >
             Add Movie
           </button>

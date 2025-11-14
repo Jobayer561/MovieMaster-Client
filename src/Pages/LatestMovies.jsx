@@ -14,9 +14,9 @@ const LatestMovies = () => {
   return (
     <div>
       {" "}
-      <div className="bg-linear-to-r from-[#ff512f]/90 via-[#ff2a68] to-[#dd2476]/90">
+      <div className="">
         <div className="max-w-7xl mx-auto px-4 py-6">
-          <div className="text-center font-semibold md:text-5xl text-2xl  text-orange-400">
+          <div className=" font-semibold text-2xl  text-orange-400">
             Latest Movies
           </div>
 

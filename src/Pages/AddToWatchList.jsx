@@ -33,7 +33,7 @@ const AddToWatchList = () => {
     return <div> Please wait ... Loading...</div>;
   }
   return (
-    <div className="max-w-[1440px] mx-auto px-4 py-6">
+    <div className="max-w-7xl mx-auto px-4 py-6">
       {movies.length === 0 ? (
         <div className="flex flex-col items-center py-20">
           <img

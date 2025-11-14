@@ -3,12 +3,12 @@ import { MdHighQuality, MdSecurity, MdSpeed, MdDevices } from "react-icons/md";
 
 const MovieMasterPro = () => {
   return (
-    <div className="bg-[#170F29] py-16 text-white">
+    <div className="py-16 text-white">
       <div className="max-w-7xl mx-auto px-4">
-        <h2 className="text-3xl md:text-4xl font-bold text-center mb-6 primary  ">
+        <h2 className="text-2xl md:text-4xl font-bold text-center mb-6 primary  ">
           Welcome to MovieMaster Pro
         </h2>
-        <p className="text-center text-gray-300 max-w-3xl mx-auto mb-10">
+        <p className="text-center text-gray-500 max-w-3xl mx-auto mb-10">
           MovieMaster Pro is your ultimate destination for discovering,
           streaming, and managing movies with speed, style, and security.
           Designed for cinephiles and casual viewers alike, it brings powerful

@@ -54,7 +54,7 @@ const Navbar = () => {
   );
   return (
     <div>
-      <div className="navbar bg-base-100 shadow-sm">
+      <div className="navbar  shadow-sm border-b border-gray-50/35">
         <div className="navbar-start mx-0 md:mx-4">
           <div className="dropdown">
             <div tabIndex={0} role="button" className="mr-1 lg:hidden">
@@ -76,7 +76,7 @@ const Navbar = () => {
             </div>
             <ul
               tabIndex="-1"
-              className="menu menu-sm dropdown-content bg-base-100  z-1 mt-3 w-52 p-2 shadow"
+              className="menu menu-sm dropdown-content bg-base-100 font-semibold z-50 mt-3 w-52 p-2 shadow"
             >
               {links}
             </ul>
@@ -112,6 +112,12 @@ const Navbar = () => {
           </div>
         ) : (
           <div className="navbar-end mx-0 md:mx-4 flex gap-2">
+            <input
+              onChange={(e) => handleTheme(e.target.checked)}
+              type="checkbox"
+              defaultChecked={localStorage.getItem("theme") === "dark"}
+              className="toggle"
+            />
             <div className="dropdown dropdown-end z-50">
               <div
                 tabIndex={0}
@@ -153,12 +159,6 @@ const Navbar = () => {
                     </>
                   )}
                 </>
-                <input
-                  onChange={(e) => handleTheme(e.target.checked)}
-                  type="checkbox"
-                  defaultChecked={localStorage.getItem("theme") === "dark"}
-                  className="toggle"
-                />
               </ul>
             </div>{" "}
             <button

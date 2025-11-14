@@ -7,7 +7,6 @@ const UpdatePage = () => {
   const data = useLoaderData();
   const movie = data.result;
   const navigate = useNavigate();
- 
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -44,7 +43,7 @@ const UpdatePage = () => {
 
   return (
     <div>
-      <div className=" bg-white text-gray-200 flex flex-col items-center justify-center p-6">
+      <div className="  text-gray-200 flex flex-col items-center justify-center p-6">
         <div className="flex flex-col items-center mb-8">
           <div className="bg-orange-500 p-4 rounded-full mb-4">
             <span className="text-4xl primary">

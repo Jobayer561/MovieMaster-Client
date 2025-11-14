@@ -18,7 +18,7 @@ const Carousel = () => {
 
   return (
     <div className="">
-      <div className="max-w-7xl mx-auto px-4 flex items-center justify-center">
+      <div className=" flex items-center justify-center">
         <Swiper
           modules={[Navigation, Pagination, Autoplay]}
           spaceBetween={30}
@@ -28,7 +28,7 @@ const Carousel = () => {
           autoplay={{ delay: 3000, disableOnInteraction: false }}
           loop={featured.length > 1}
           speed={600}
-          className="my-8 w-full"
+          className=" w-full"
         >
           {featured.map((movie) => (
             <SwiperSlide key={movie._id}>

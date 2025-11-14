@@ -85,7 +85,7 @@ const MovieDetails = () => {
       });
   };
   return (
-    <div className="bg-white">
+    <div className="">
       <div className="max-w-[1440px]  mx-auto px-4 py-8  text-gray-900 ">
         <div className="w-full max-w-6xl mx-auto flex flex-col lg:flex-row gap-8 rounded-2xl p-2 overflow-hidden shadow-2xl">
           <div className="lg:w-1/2">

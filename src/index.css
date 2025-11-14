@@ -35,5 +35,5 @@ a.active {
 }
 .swiper-button-next,
 .swiper-button-prev {
-  transform: scale(0.4);
+  transform: scale(0.8);
 }

@@ -3,10 +3,10 @@ import { MdLocalMovies } from "react-icons/md";
 
 const GenreSection = () => {
   return (
-    <div className="bg-linear-to-r from-[#ff512f]/90 via-[#ff2a68] to-[#dd2476]/90 py-12">
+    <div className=" py-12">
       <div className="max-w-7xl mx-auto px-4">
-        <h2 className="text-3xl md:text-4xl font-bold text-center text-white mb-8">
-          <div className="flex items-center text-center justify-center gap-1">
+        <h2 className="text-2xl font-bold text-left mb-8">
+          <div className="flex items-center  justify-center gap-1">
             <span className="text-[#ff512f]">
               <MdLocalMovies size={40} />
             </span>
