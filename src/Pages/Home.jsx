@@ -21,7 +21,7 @@ const Home = () => {
       });
   }, []);
   return (
-    <div className="bg-linear-to-r from-[#ff512f]/90 via-[#ff2a68] to-[#dd2476]/90">
+    <div className="bg-white">
       <div className="">
         <Carousel />
       </div>

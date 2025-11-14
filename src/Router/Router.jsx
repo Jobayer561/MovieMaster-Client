@@ -9,6 +9,7 @@ import Login from "../Pages/Login";
 import PrivateRoute from "./PrivateRoute";
 import AddMovies from "../Pages/AddMovies";
 import UpdatePage from "../Pages/UpdatePage";
+import AddToWatchList from "../Pages/AddToWatchList";
 
 export const router = createBrowserRouter([
   {
@@ -65,6 +66,14 @@ export const router = createBrowserRouter([
         ),
         loader: ({ params }) =>
           fetch(`http://localhost:3000/movies/${params.id}`),
+      },
+      {
+        path: "/myWatchList",
+        element:(
+           <PrivateRoute>
+            <AddToWatchList/>
+           </PrivateRoute>
+        ),
       },
     ],
   },

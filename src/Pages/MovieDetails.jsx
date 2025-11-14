@@ -4,6 +4,7 @@ import { LiaEditSolid } from "react-icons/lia";
 import { MdDelete } from "react-icons/md";
 import { AuthContext } from "../Context/AuthContext";
 import Swal from "sweetalert2";
+import toast from "react-hot-toast";
 const MovieDetails = () => {
   const { id } = useParams();
   const [movie, setMovie] = useState({});
@@ -51,8 +52,40 @@ const MovieDetails = () => {
       }
     });
   };
+  const handleAddToWatchList = () => {
+    const watchListData = {
+      title: movie.title,
+      genre: movie.genre,
+      releaseYear: Number(movie.releaseYear),
+      director: movie.director,
+      cast: movie.cast,
+      rating: Number(movie.rating),
+      duration: Number(movie.duration),
+      plotSummary: movie.plotSummary,
+      posterUrl: movie.posterUrl,
+      language: movie.language,
+      country: movie.country,
+      watchListBy: user?.email,
+    };
+
+    fetch(`http://localhost:3000/watchList/${movie._id}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(watchListData),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        if (!data.success) {
+          return toast.error("Already added to your WatchList!");
+        }
+        toast.success("Successfully Added To My WatchList!");
+      });
+  };
   return (
-    <div className="bg-[#170F29]">
+    <div className="bg-white">
       <div className="max-w-[1440px]  mx-auto px-4 py-8  text-gray-900 ">
         <div className="w-full max-w-6xl mx-auto flex flex-col lg:flex-row gap-8 rounded-2xl p-2 overflow-hidden shadow-2xl">
           <div className="lg:w-1/2">
@@ -63,7 +96,7 @@ const MovieDetails = () => {
             />
           </div>
 
-          <div className="lg:w-1/2 mt-8 lg:mt-0 rounded-2xl p-6 md:p-8">
+          <div className="lg:w-1/2 mt-8 lg:mt-0 rounded-2xl p-6">
             <h1 className="text-4xl md:text-5xl font-extrabold text-center primary mb-4">
               {movie?.title}
             </h1>
@@ -110,14 +143,29 @@ const MovieDetails = () => {
                 {movie?.addedBy}
               </p>
             </div>
+            <div className="mt-4">
+              <button
+                onClick={handleAddToWatchList}
+                className="block w-full text-center py-3 font-semibold text-white rounded-full bg-linear-to-r from-[#ff512f] to-[#dd2476] hover:scale-105 transition-transform"
+                to="/myWatchList"
+              >
+                Add To WatchList
+              </button>
+            </div>
 
             {user?.email === movie?.addedBy && (
-              <div className="mt-10 flex justify-center gap-4">
-                <Link to={`/movies/update/${movie._id} `} className="my-btn">
+              <div className="mt-6 flex justify-center gap-4">
+                <Link
+                  to={`/movies/update/${movie._id} `}
+                  className="btn text-white bg-linear-to-r from-[#ff512f] to-[#dd2476] hover:scale-105 transition-transform rounded-full"
+                >
                   <LiaEditSolid className="text-xl" />
                   Edit
                 </Link>
-                <button onClick={handleDelete} className="my-btn">
+                <button
+                  onClick={handleDelete}
+                  className="btn text-white bg-linear-to-r from-[#ff512f] to-[#dd2476] hover:scale-105 transition-transform rounded-full"
+                >
                   <MdDelete className="text-xl" />
                   Delete
                 </button>

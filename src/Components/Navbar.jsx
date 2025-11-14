@@ -44,6 +44,9 @@ const Navbar = () => {
             <li>
               <NavLink to="/addMovies">Add Movies</NavLink>
             </li>
+            <li>
+              <NavLink to={"/myWatchList"}>My WatchList</NavLink>
+            </li>
           </>
         )}
       </>
@@ -94,10 +97,16 @@ const Navbar = () => {
         </div>
         {!user ? (
           <div className="navbar-end mx-0 md:mx-4 flex gap-2">
-            <Link to={"/login"} className="my-btn">
+            <Link
+              to={"/login"}
+              className="btn text-white bg-linear-to-r from-[#ff512f] to-[#dd2476] hover:scale-105 transition-transform rounded-full"
+            >
               Login
             </Link>
-            <Link to={"/register"} className="my-btn ">
+            <Link
+              to={"/register"}
+              className="btn text-white bg-linear-to-r from-[#ff512f] to-[#dd2476] hover:scale-105 transition-transform rounded-full "
+            >
               Register
             </Link>
           </div>
@@ -138,6 +147,9 @@ const Navbar = () => {
                       <li>
                         <NavLink to="/addMovies">Add Movies</NavLink>
                       </li>
+                      <li>
+                        <NavLink to={"/myWatchList"}>My WatchList</NavLink>
+                      </li>
                     </>
                   )}
                 </>
@@ -149,7 +161,10 @@ const Navbar = () => {
                 />
               </ul>
             </div>{" "}
-            <button onClick={handleSignout} className="my-btn">
+            <button
+              onClick={handleSignout}
+              className="btn text-white bg-linear-to-r from-[#ff512f] to-[#dd2476] hover:scale-105 transition-transform rounded-full"
+            >
               Logout
             </button>
           </div>

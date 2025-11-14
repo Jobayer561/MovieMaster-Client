@@ -1,14 +1,43 @@
 import React from "react";
 import { FaStar } from "react-icons/fa";
-import { Link } from "react-router";
+import Swal from "sweetalert2";
 
-const AllMoviesCard = ({ movie }) => {
-  
-
+const WatchListCard = ({ movie, removeMovie }) => {
   const { posterUrl, title, genre, releaseYear, rating, plotSummary, _id } =
     movie;
+
+  const handleRemove = () => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, remove it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        fetch(`http://localhost:3000/watchList/${_id}`, {
+          method: "DELETE",
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            if (data.success) {
+              removeMovie(_id);
+
+              Swal.fire({
+                title: "Removed!",
+                text: "Movie removed from watchList.",
+                icon: "success",
+              });
+            }
+          })
+          .catch((error) => console.error(error));
+      }
+    });
+  };
   return (
-    <div>
+    <div className="max-w-7xl mx-auto">
       <div className="card bg-gray-200 hover:scale-105 transition-transform shadow-md">
         <figure className="h-48 overflow-hidden   rounded-t-md">
           <img
@@ -34,16 +63,16 @@ const AllMoviesCard = ({ movie }) => {
               {rating}
             </div>
           </div>
-          <Link
-            to={`/movie-details/${_id}`}
+          <button
+            onClick={handleRemove}
             className="btn text-white bg-linear-to-r from-[#ff512f] to-[#dd2476] hover:scale-105 transition-transform rounded-full mt-5"
           >
-            View Details
-          </Link>
+            Remove from WatchList
+          </button>
         </div>
       </div>
     </div>
   );
 };
 
-export default AllMoviesCard;
+export default WatchListCard;

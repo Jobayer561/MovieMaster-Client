@@ -5,7 +5,7 @@ import AllMoviesCard from "./AllMoviesCard";
 const AllMovies = () => {
   const movies = useLoaderData();
   return (
-    <section className="bg-[#170F29] ">
+    <section className=" ">
       <div className="max-w-[1440px] mx-auto px-4 py-6">
         <div className="text-center font-semibold md:text-5xl text-2xl  primary">
           AllMovies

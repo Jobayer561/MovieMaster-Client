@@ -39,7 +39,7 @@ const AddMovieForm = () => {
       });
   };
   return (
-    <div className=" bg-linear-to-r from-[#ff512f]/90 via-[#ff2a68] to-[#dd2476]/90 text-gray-200 flex flex-col items-center justify-center p-6">
+    <div className=" bg-white text-gray-200 flex flex-col items-center justify-center p-6">
       <div className="flex flex-col items-center mb-8">
         <div className="bg-orange-500 p-4 rounded-full mb-4">
           <span className="text-4xl primary">
