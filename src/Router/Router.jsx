@@ -30,14 +30,10 @@ export const router = createBrowserRouter([
       },
       {
         path: "/movies/:id",
-        element: (
-          <PrivateRoute>
-            <MovieDetails />
-          </PrivateRoute>
-        ),
+        element: <MovieDetails />,
       },
       {
-        path: "/my-collection",
+        path: "/movies/my-collection",
         element: (
           <PrivateRoute>
             <MyCollections />
@@ -45,7 +41,7 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: "/add",
+        path: "/movies/add",
         element: (
           <PrivateRoute>
             <AddMovies />
@@ -61,7 +57,7 @@ export const router = createBrowserRouter([
         element: <Login />,
       },
       {
-        path: "/update/:id",
+        path: "/movies/update/:id",
         element: (
           <PrivateRoute>
             <UpdatePage />

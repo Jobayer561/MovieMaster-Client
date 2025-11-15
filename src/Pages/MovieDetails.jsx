@@ -45,7 +45,7 @@ const MovieDetails = () => {
           .then((res) => res.json())
           .then((data) => {
             console.log(data);
-            navigate("/allMovies");
+            navigate("/movies");
 
             Swal.fire({
               title: "Deleted!",
@@ -176,7 +176,7 @@ const MovieDetails = () => {
             {user?.email === movie?.addedBy && (
               <div className="mt-6 flex justify-center gap-4">
                 <Link
-                  to={`/update/${movie._id} `}
+                  to={`/movies/update/${movie._id} `}
                   className="btn text-white bg-linear-to-r from-[#ff512f] to-[#dd2476] hover:scale-105 transition-transform rounded-full"
                 >
                   <LiaEditSolid className="text-xl" />

@@ -33,16 +33,18 @@ const Navbar = () => {
         <NavLink to="/">Home</NavLink>
       </li>
       <li>
-        <NavLink to="/movies">All Movies</NavLink>
+        <NavLink end="/movies" to="/movies">
+          All Movies
+        </NavLink>
       </li>
       <>
         {user && (
           <>
             <li>
-              <NavLink to="/my-collection">My Collections</NavLink>
+              <NavLink to="/movies/my-collection">My Collections</NavLink>
             </li>
             <li>
-              <NavLink to="/add">Add Movies</NavLink>
+              <NavLink to="/movies/add">Add Movies</NavLink>
             </li>
             <li>
               <NavLink to={"/myWatchList"}>My WatchList</NavLink>
@@ -147,10 +149,10 @@ const Navbar = () => {
                   </div>
 
                   <li>
-                    <NavLink to="/my-collection">My Collections</NavLink>
+                    <NavLink to="/movies/my-collection">My Collections</NavLink>
                   </li>
                   <li>
-                    <NavLink to="/add">Add Movies</NavLink>
+                    <NavLink to="/movies/add">Add Movies</NavLink>
                   </li>
                   <li>
                     <NavLink to="/myWatchList">My WatchList</NavLink>
