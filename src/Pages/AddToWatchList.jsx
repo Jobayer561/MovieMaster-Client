@@ -53,7 +53,7 @@ const AddToWatchList = () => {
           </p>
 
           <Link
-            to="/allMovies"
+            to="/movies"
             className="btn text-white bg-linear-to-r from-[#ff512f] to-[#dd2476] hover:scale-105 transition-transform  mt-4 rounded-full"
           >
             Browse Movies

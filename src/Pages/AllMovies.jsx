@@ -43,7 +43,7 @@ const AllMovies = () => {
   return (
     <section className="max-w-7xl mx-auto px-4 py-6">
       <div className="flex flex-wrap items-center justify-between gap-4 mb-6">
-        <div className="text-2xl md:text-4xl font-semibold primary">
+        <div className="text-2xl md:text-3xl font-semibold primary">
           All Movies
         </div>
 

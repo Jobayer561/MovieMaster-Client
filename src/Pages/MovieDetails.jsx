@@ -104,7 +104,7 @@ const MovieDetails = () => {
 
   return (
     <div className="">
-      <div className="max-w-[1440px]  mx-auto px-4 py-8  text-gray-900 ">
+      <div className="max-w-[1440px]  mx-auto px-4 py-8  text-gray-950 ">
         <div className="w-full max-w-6xl mx-auto flex flex-col lg:flex-row gap-8 rounded-2xl p-2 overflow-hidden shadow-2xl">
           <div className="lg:w-1/2">
             <img
@@ -115,49 +115,51 @@ const MovieDetails = () => {
           </div>
 
           <div className="lg:w-1/2 mt-8 lg:mt-0 rounded-2xl p-6">
-            <h1 className="text-3xl md:text-5xl font-bold text-center primary mb-4">
+            <h1 className="text-3xl md:text-5xl font-bold text-center primary mb-4 animate-pulse">
               {movie?.title}
             </h1>
 
-            <p className="text-gray-500 text-center text-xl font-semibold max-w-3xl mx-auto mb-8">
+            <p className="text-cyan-400 text-center text-xl font-semibold max-w-3xl mx-auto mb-8">
               {movie?.plotSummary}
             </p>
 
-            <div className="grid sm:grid-cols-2 gap-6 font-semibold text-slate-600">
+            <div className="grid sm:grid-cols-2 gap-6 font-semibold text-amber-700/80">
               <p>
-                <span className="font-bold text-pink-600">Genre :</span>{" "}
+                <span className="font-bold text-indigo-500">Genre :</span>{" "}
                 {movie?.genre}
               </p>
               <p>
-                <span className="font-bold text-pink-600">Release Year : </span>{" "}
+                <span className="font-bold text-indigo-500">
+                  Release Year :{" "}
+                </span>{" "}
                 {movie?.releaseYear}
               </p>
               <p>
-                <span className="font-bold text-pink-600">Director : </span>{" "}
+                <span className="font-bold text-indigo-500">Director : </span>{" "}
                 {movie?.director}
               </p>
               <p>
-                <span className="font-bold text-pink-600">Duration : </span>{" "}
+                <span className="font-bold text-indigo-500">Duration : </span>{" "}
                 {movie?.duration} mins
               </p>
               <p>
-                <span className="font-bold text-indigo-600">Rating : </span> ⭐{" "}
+                <span className="font-bold text-indigo-500">Rating : </span> ⭐{" "}
                 {movie?.rating}
               </p>
               <p>
-                <span className="font-bold text-pink-600">Language : </span>{" "}
+                <span className="font-bold text-indigo-500">Language : </span>{" "}
                 {movie?.language}
               </p>
               <p>
-                <span className="font-bold text-pink-600">Country : </span>{" "}
+                <span className="font-bold text-indigo-500">Country : </span>{" "}
                 {movie?.country}
               </p>
               <p className="sm:col-span-2">
-                <span className="font-bold text-pink-600">Cast : </span>{" "}
+                <span className="font-bold text-indigo-500">Cast : </span>{" "}
                 {movie?.cast}
               </p>
               <p className="sm:col-span-2 font-semibold">
-                <span className="font-bold text-pink-600">Added by : </span>{" "}
+                <span className="font-bold text-indigo-500">Added by : </span>{" "}
                 {movie?.addedBy}
               </p>
             </div>
@@ -174,7 +176,7 @@ const MovieDetails = () => {
             {user?.email === movie?.addedBy && (
               <div className="mt-6 flex justify-center gap-4">
                 <Link
-                  to={`/movies/update/${movie._id} `}
+                  to={`/update/${movie._id} `}
                   className="btn text-white bg-linear-to-r from-[#ff512f] to-[#dd2476] hover:scale-105 transition-transform rounded-full"
                 >
                   <LiaEditSolid className="text-xl" />

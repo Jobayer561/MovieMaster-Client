@@ -37,7 +37,7 @@ const UpdatePage = () => {
       .then((data) => {
         console.log(data);
         toast.success("Successfully updated!");
-        navigate(`/movie-details/${movie._id}`);
+        navigate(`/movies/${movie._id}`);
       })
       .catch((err) => {
         console.log(err);

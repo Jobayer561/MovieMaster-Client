@@ -5,10 +5,10 @@ const GenreSection = () => {
   return (
     <div className=" py-12">
       <div className="max-w-7xl mx-auto px-4">
-        <h2 className="text-2xl font-bold text-left mb-8">
+        <h2 className="text-2xl md:text-3xl font-bold  mb-8">
           <div className="flex items-center  justify-center gap-1">
-            <span className="text-[#ff512f]">
-              <MdLocalMovies size={40} />
+            <span className="">
+              <MdLocalMovies className="text-[#ff512f]" size={40} />
             </span>
 
             <span className="primary">Browse by Genre</span>

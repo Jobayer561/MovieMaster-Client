@@ -39,7 +39,7 @@ const TopRatedMovies = () => {
   return (
     <div className="">
       <div className="max-w-7xl mx-auto px-4 py-6">
-        <div className="font-semibold md:text-2xl primary">
+        <div className="font-bold md:text-3xl primary">
           Top Rated Movies
         </div>
 

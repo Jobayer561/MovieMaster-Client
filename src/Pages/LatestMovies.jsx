@@ -42,7 +42,7 @@ const LatestMovies = () => {
   return (
     <div>
       <div className="max-w-7xl mx-auto px-4 py-6">
-        <div className="font-semibold text-2xl  primary">Latest Movies</div>
+        <div className="font-bold text-2xl md:text-3xl  primary">Latest Movies</div>
 
         {loading ? (
           <div className="mt-8">

@@ -5,7 +5,7 @@ const MovieMasterPro = () => {
   return (
     <div className="py-16 text-white">
       <div className="max-w-7xl mx-auto px-4">
-        <h2 className="text-2xl md:text-4xl font-bold text-center mb-6 primary  ">
+        <h2 className="text-2xl md:text-3xl font-bold text-center mb-6 primary  ">
           Welcome to MovieMaster Pro
         </h2>
         <p className="text-center text-gray-500 max-w-3xl mx-auto mb-10">

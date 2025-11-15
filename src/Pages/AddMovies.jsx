@@ -4,7 +4,6 @@ import { RiMovie2AiFill } from "react-icons/ri";
 import { AuthContext } from "../Context/AuthContext";
 const AddMovieForm = () => {
   const { user } = use(AuthContext);
-
   const handleSubmit = (e) => {
     e.preventDefault();
     const formData = {

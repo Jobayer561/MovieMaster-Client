@@ -23,13 +23,13 @@ export const router = createBrowserRouter([
         element: <Home />,
       },
       {
-        path: "/allMovies",
+        path: "/movies",
         element: <AllMovies />,
         loader: () =>
           fetch("https://b12-a10-movie-master-server.vercel.app/movies"),
       },
       {
-        path: "/movie-details/:id",
+        path: "/movies/:id",
         element: (
           <PrivateRoute>
             <MovieDetails />
@@ -37,7 +37,7 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: "/myCollection",
+        path: "/my-collection",
         element: (
           <PrivateRoute>
             <MyCollections />
@@ -45,7 +45,7 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: "/addMovies",
+        path: "/add",
         element: (
           <PrivateRoute>
             <AddMovies />
@@ -61,7 +61,7 @@ export const router = createBrowserRouter([
         element: <Login />,
       },
       {
-        path: "movies/update/:id",
+        path: "/update/:id",
         element: (
           <PrivateRoute>
             <UpdatePage />
