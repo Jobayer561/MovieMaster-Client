@@ -86,9 +86,7 @@ const AddMovieForm = () => {
                 required
                 className="select select-info appearance-none w-full bg-[#111] autofill:bg-[#111]"
               >
-                <option value="" disabled>
-                  Select a Genre
-                </option>
+                <option value="">Select a Genre</option>
                 <option>Action</option>
                 <option>Comedy</option>
                 <option>Drama</option>
@@ -154,7 +152,7 @@ const AddMovieForm = () => {
                 required
                 className="select select-info w-full appearance-none bg-[#111] autofill:bg-[#111]"
               >
-                <option disabled>Language</option>
+                <option>Language</option>
                 <option>English</option>
                 <option>Bangla</option>
                 <option>Hindi</option>
