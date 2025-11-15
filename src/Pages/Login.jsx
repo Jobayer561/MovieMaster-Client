@@ -44,7 +44,7 @@ const Login = () => {
           image: result.user.photoURL,
         };
 
-        fetch("http://localhost:3000/users", {
+        fetch("https://b12-a10-movie-master-server.vercel.app/users", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -70,34 +70,38 @@ const Login = () => {
   };
   return (
     <div
-      className="min-h-screen px-4 flex justify-center items-center   bg-linear-to-r from-[#ff512f]/90 via-[#ff2a68] to-[#dd2476]/90
+      className="min-h-screen px-4 flex justify-center items-center   
  animate-gradient"
     >
       <div className="w-[450px] p-6 rounded-2xl shadow-2xl  border border-white/20">
         <div className="text-center mb-3">
-          <h1 className="text-2xl font-bold mt-2 text-gray-800">Login</h1>
+          <h1 className="text-2xl font-bold mt-2 primary">Login</h1>
         </div>
 
         <form onSubmit={handleLogin}>
           <div className="mb-3 ">
-            <label className=" text-gray-500 text-sm  ">Email</label>
+            <label className=" text-gray-500 text-sm  font-semibold">
+              Email
+            </label>
             <input
               type="text"
               name="email"
               placeholder="example@gmail.com"
               required
-              className="w-full px-5 py-3 rounded-full  shadow-md focus:outline-none "
+              className="w-full px-5 py-3 rounded-full  shadow-md border border-gray-200 focus:outline-none "
             />
           </div>
 
           <div className="relative mb-3">
-            <label className=" text-gray-500 text-sm ">Password</label>
+            <label className=" text-gray-500 text-sm font-semibold">
+              Password
+            </label>
             <input
               type={show ? "text" : "password"}
               name="password"
               placeholder="••••••••"
               required
-              className="w-full px-5 py-3 rounded-full  shadow-md focus:outline-none"
+              className="w-full px-5 py-3 rounded-full  shadow-md border border-gray-300 focus:outline-none"
             />
             <span
               onClick={() => setShow(!show)}
@@ -108,7 +112,7 @@ const Login = () => {
           </div>
 
           <div className="flex justify-between items-center text-sm mb-6">
-            <a href="#" className="text-gray-600 hover:text-red-500">
+            <a href="#" className="text-gray-500 hover:text-red-500">
               Forgot password?
             </a>
           </div>
@@ -129,7 +133,7 @@ const Login = () => {
           <div className="flex justify-center gap-4">
             <button
               onClick={handleGoogleSignin}
-              className="btn w-full h-12 shadow-lg hover:shadow-xl  rounded-full hover:scale-105 transition-transform  text-black border-[#e5e5e5]"
+              className="btn bg-linear-to-r from-red-500 to-orange-500  w-full h-12 shadow-lg hover:shadow-xl  rounded-full hover:scale-105 transition-transform  text-white "
             >
               <svg
                 aria-label="Google logo"

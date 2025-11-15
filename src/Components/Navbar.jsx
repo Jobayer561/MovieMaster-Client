@@ -95,80 +95,78 @@ const Navbar = () => {
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1">{links}</ul>
         </div>
-        {!user ? (
-          <div className="navbar-end mx-0 md:mx-4 flex gap-2">
-            <Link
-              to={"/login"}
-              className="btn text-white bg-linear-to-r from-[#ff512f] to-[#dd2476] hover:scale-105 transition-transform rounded-full"
-            >
-              Login
-            </Link>
-            <Link
-              to={"/register"}
-              className="btn text-white bg-linear-to-r from-[#ff512f] to-[#dd2476] hover:scale-105 transition-transform rounded-full "
-            >
-              Register
-            </Link>
-          </div>
-        ) : (
-          <div className="navbar-end mx-0 md:mx-4 flex gap-2">
-            <input
-              onChange={(e) => handleTheme(e.target.checked)}
-              type="checkbox"
-              defaultChecked={localStorage.getItem("theme") === "dark"}
-              className="toggle"
-            />
-            <div className="dropdown dropdown-end z-50">
-              <div
-                tabIndex={0}
-                role="button"
-                className="btn btn-ghost btn-circle avatar"
-              >
-                <div className="w-9 border-2 border-gray-300 rounded-full">
-                  <img
-                    alt="Tailwind CSS Navbar component"
-                    referrerPolicy="no-referrer"
-                    src={
-                      user?.photoURL ||
-                      "https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
-                    }
-                  />
-                </div>
-              </div>
-              <ul
-                tabIndex="-1"
-                className="ml-4 menu  menu-sm dropdown-content bg-base-100 rounded-box z-50 mt-3 w-44 p-2 shadow "
-              >
-                <div className=" pb-3 border-b border-b-gray-200">
-                  <li className="text-sm font-bold">{user?.displayName}</li>
-                  <li className="text-xs">{user?.email}</li>
-                </div>
+        <div className="navbar-end mx-0 md:mx-4 flex items-center gap-3">
+          <input
+            onChange={(e) => handleTheme(e.target.checked)}
+            type="checkbox"
+            defaultChecked={localStorage.getItem("theme") === "dark"}
+            className="toggle"
+          />
 
-                <>
-                  {user && (
-                    <>
-                      <li>
-                        <NavLink to="/myCollection">My Collections</NavLink>
-                      </li>
-                      <li>
-                        <NavLink to="/addMovies">Add Movies</NavLink>
-                      </li>
-                      <li>
-                        <NavLink to={"/myWatchList"}>My WatchList</NavLink>
-                      </li>
-                    </>
-                  )}
-                </>
-              </ul>
-            </div>{" "}
-            <button
-              onClick={handleSignout}
-              className="btn text-white bg-linear-to-r from-[#ff512f] to-[#dd2476] hover:scale-105 transition-transform rounded-full"
-            >
-              Logout
-            </button>
-          </div>
-        )}
+          {!user ? (
+            <>
+              <Link
+                to={"/login"}
+                className="btn text-white bg-linear-to-r from-[#ff512f] to-[#dd2476] hover:scale-105 transition-transform rounded-full"
+              >
+                Login
+              </Link>
+              <Link
+                to={"/register"}
+                className="btn text-white bg-linear-to-r from-[#ff512f] to-[#dd2476] hover:scale-105 transition-transform rounded-full"
+              >
+                Register
+              </Link>
+            </>
+          ) : (
+            <>
+              <div className="dropdown dropdown-end z-50">
+                <div
+                  tabIndex={0}
+                  role="button"
+                  className="btn btn-ghost btn-circle avatar"
+                >
+                  <div className="w-9 border-2 border-gray-300 rounded-full">
+                    <img
+                      alt=""
+                      referrerPolicy="no-referrer"
+                      src={
+                        user?.photoURL ||
+                        "https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
+                      }
+                    />
+                  </div>
+                </div>
+                <ul
+                  tabIndex="-1"
+                  className="ml-4 menu menu-sm dropdown-content bg-base-100 rounded-box z-50 mt-3 w-44 p-2 shadow"
+                >
+                  <div className="pb-3 border-b border-b-gray-200">
+                    <li className="text-sm font-bold">{user?.displayName}</li>
+                    <li className="text-xs">{user?.email}</li>
+                  </div>
+
+                  <li>
+                    <NavLink to="/myCollection">My Collections</NavLink>
+                  </li>
+                  <li>
+                    <NavLink to="/addMovies">Add Movies</NavLink>
+                  </li>
+                  <li>
+                    <NavLink to="/myWatchList">My WatchList</NavLink>
+                  </li>
+                </ul>
+              </div>
+
+              <button
+                onClick={handleSignout}
+                className="btn text-white bg-linear-to-r from-[#ff512f] to-[#dd2476] hover:scale-105 transition-transform rounded-full"
+              >
+                Logout
+              </button>
+            </>
+          )}
+        </div>
       </div>
     </div>
   );

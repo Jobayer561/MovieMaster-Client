@@ -5,16 +5,20 @@ import { MdDelete } from "react-icons/md";
 import { AuthContext } from "../Context/AuthContext";
 import Swal from "sweetalert2";
 import toast from "react-hot-toast";
+import { CircleLoader } from "react-spinners";
 const MovieDetails = () => {
   const { id } = useParams();
   const [movie, setMovie] = useState({});
+  const [loading, setLoading] = useState(true);
+
   const { user } = use(AuthContext);
   const navigate = useNavigate();
   useEffect(() => {
-    fetch(`http://localhost:3000/movies/${id}`)
+    fetch(`https://b12-a10-movie-master-server.vercel.app/movies/${id}`)
       .then((res) => res.json())
       .then((data) => {
         setMovie(data.result);
+        setLoading(false);
       });
   }, [id]);
 
@@ -29,12 +33,15 @@ const MovieDetails = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:3000/movies/${movie._id}`, {
-          method: "DELETE",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        })
+        fetch(
+          `https://b12-a10-movie-master-server.vercel.app/movies/${movie._id}`,
+          {
+            method: "DELETE",
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        )
           .then((res) => res.json())
           .then((data) => {
             console.log(data);
@@ -68,13 +75,16 @@ const MovieDetails = () => {
       watchListBy: user?.email,
     };
 
-    fetch(`http://localhost:3000/watchList/${movie._id}`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(watchListData),
-    })
+    fetch(
+      `https://b12-a10-movie-master-server.vercel.app/watchList/${movie._id}`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(watchListData),
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
@@ -84,6 +94,14 @@ const MovieDetails = () => {
         toast.success("Successfully Added To My WatchList!");
       });
   };
+  if (loading) {
+    return (
+      <div className="h-[97vh] flex items-center justify-center">
+        <CircleLoader color="#FF6B6B" />
+      </div>
+    );
+  }
+
   return (
     <div className="">
       <div className="max-w-[1440px]  mx-auto px-4 py-8  text-gray-900 ">
@@ -97,15 +115,15 @@ const MovieDetails = () => {
           </div>
 
           <div className="lg:w-1/2 mt-8 lg:mt-0 rounded-2xl p-6">
-            <h1 className="text-4xl md:text-5xl font-extrabold text-center primary mb-4">
+            <h1 className="text-3xl md:text-5xl font-bold text-center primary mb-4">
               {movie?.title}
             </h1>
 
-            <p className="text-[#64748B] text-center text-xl font-semibold max-w-3xl mx-auto mb-8">
+            <p className="text-gray-500 text-center text-xl font-semibold max-w-3xl mx-auto mb-8">
               {movie?.plotSummary}
             </p>
 
-            <div className="grid sm:grid-cols-2 gap-6 font-semibold text-[#06B6D4]">
+            <div className="grid sm:grid-cols-2 gap-6 font-semibold text-slate-600">
               <p>
                 <span className="font-bold text-pink-600">Genre :</span>{" "}
                 {movie?.genre}
@@ -123,7 +141,7 @@ const MovieDetails = () => {
                 {movie?.duration} mins
               </p>
               <p>
-                <span className="font-bold text-pink-600">Rating : </span> ⭐{" "}
+                <span className="font-bold text-indigo-600">Rating : </span> ⭐{" "}
                 {movie?.rating}
               </p>
               <p>

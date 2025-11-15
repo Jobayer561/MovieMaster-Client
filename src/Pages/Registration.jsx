@@ -44,7 +44,7 @@ const Registration = () => {
           email,
           image: photoUrl,
         };
-        fetch("http://localhost:3000/users", {
+        fetch("https://b12-a10-movie-master-server.vercel.app/users", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(userInfo),
@@ -93,7 +93,7 @@ const Registration = () => {
           image: result.user.photoURL,
         };
 
-        fetch("http://localhost:3000/users", {
+        fetch("https://b12-a10-movie-master-server.vercel.app/users", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -120,54 +120,62 @@ const Registration = () => {
 
   return (
     <div
-      className=" px-4 flex justify-center items-center   bg-linear-to-r from-[#ff512f]/90 via-[#ff2a68] to-[#dd2476]/90
+      className=" px-4 flex justify-center items-center  
  animate-gradient"
     >
       <div className="/90 w-[450px] p-6 rounded-2xl shadow-2xl my-4  border border-white/20">
         <div className="text-center mb-3">
-          <h1 className="text-2xl font-bold mt-2 text-gray-800">Register</h1>
+          <h1 className="text-2xl font-bold mt-2 primary">Register</h1>
         </div>
 
         <form onSubmit={handleRegistration}>
           {" "}
           <div className="mb-3 ">
-            <label className=" text-gray-500 text-sm  ">Name</label>
+            <label className=" text-gray-500 font-semibold text-sm  ">
+              Name
+            </label>
             <input
               type="text"
               name="name"
               placeholder="Enter Your Name"
               required
-              className="w-full px-5 py-3 rounded-full  shadow-md focus:outline-none "
+              className="w-full px-5 py-3 rounded-full  shadow-md border border-gray-300 focus:outline-none "
             />
           </div>{" "}
           <div className="mb-3 ">
-            <label className=" text-gray-500 text-sm  ">PhotoURL</label>
+            <label className=" text-gray-500 text-sm font-semibold ">
+              PhotoURL
+            </label>
             <input
               type="text"
               name="photoURL"
               placeholder="Enter Your PhotoURL"
               required
-              className="w-full px-5 py-3 rounded-full  shadow-md focus:outline-none "
+              className="w-full px-5 py-3 rounded-full  shadow-md border border-gray-300 focus:outline-none "
             />
           </div>
           <div className="mb-3 ">
-            <label className=" text-gray-500 text-sm  ">Email</label>
+            <label className=" text-gray-500 text-sm   font-semibold">
+              Email
+            </label>
             <input
               type="text"
               name="email"
               placeholder="example@gmail.com"
               required
-              className="w-full px-5 py-3 rounded-full  shadow-md focus:outline-none "
+              className="w-full px-5 py-3 rounded-full  shadow-md border border-gray-300 focus:outline-none "
             />
           </div>
           <div className="relative mb-3">
-            <label className=" text-gray-500 text-sm ">Password</label>
+            <label className=" text-gray-500 text-sm font-semibold">
+              Password
+            </label>
             <input
               type={show ? "text" : "password"}
               name="password"
               placeholder="••••••••"
               required
-              className="w-full px-5 py-3 rounded-full  shadow-md focus:outline-none"
+              className="w-full px-5 py-3 rounded-full  shadow-md border border-gray-300 focus:outline-none"
             />
             <span
               onClick={() => setShow(!show)}
@@ -190,7 +198,7 @@ const Registration = () => {
           <div className="flex justify-center gap-4">
             <button
               onClick={handleGoogleSignin}
-              className="btn w-full h-12 shadow-lg hover:shadow-xl  rounded-full hover:scale-105 transition-transform  text-black border-[#e5e5e5]"
+              className="btn border-none w-full h-12 shadow-lg hover:shadow-xl  rounded-full hover:scale-105 transition-transform  bg-linear-to-r from-red-500 to-orange-500 text-white "
             >
               <svg
                 aria-label="Google logo"
@@ -200,7 +208,7 @@ const Registration = () => {
                 viewBox="0 0 512 512"
               >
                 <g>
-                  <path d="m0 0H512V512H0" fill="#fff"></path>
+                  <path d="m0 0H512V512H0" fill=""></path>
                   <path
                     fill="#34a853"
                     d="M153 292c30 82 118 95 171 60h62v48A192 192 0 0190 341"

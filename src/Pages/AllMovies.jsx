@@ -1,6 +1,17 @@
 import React, { useState } from "react";
 import { useLoaderData } from "react-router";
 import AllMoviesCard from "./AllMoviesCard";
+import { motion } from "framer-motion";
+import LoadingSpinner from "./LoadingSpinner";
+import notFound from "../assets/movie-not-found.webp";
+const containerVariants = {
+  hidden: {},
+  show: {
+    transition: {
+      staggerChildren: 0.4,
+    },
+  },
+};
 
 const AllMovies = () => {
   const data = useLoaderData();
@@ -8,27 +19,32 @@ const AllMovies = () => {
   const [selectedGenre, setSelectedGenre] = useState("");
   const [minRating, setMinRating] = useState("");
   const [maxRating, setMaxRating] = useState("");
+  const [loading, setLoading] = useState(false);
   const filterApplied =
     selectedGenre !== "" || minRating !== "" || maxRating !== "";
 
   const handleFilter = (e) => {
     e.preventDefault();
 
-    let url = "http://localhost:3000/moviesFilter?";
+    let url = "https://b12-a10-movie-master-server.vercel.app/moviesFilter?";
     if (selectedGenre) url += `genre=${selectedGenre}&`;
     if (minRating) url += `minRating=${minRating}&`;
     if (maxRating) url += `maxRating=${maxRating}`;
-
+    setLoading(true);
     fetch(url)
       .then((res) => res.json())
-      .then((data) => setMovies(data));
+      .then((data) => {
+        setMovies(data);
+        setLoading(false);
+      })
+      .catch(() => setLoading(false));
   };
 
   return (
     <section className="max-w-7xl mx-auto px-4 py-6">
       <div className="flex flex-wrap items-center justify-between gap-4 mb-6">
         <div className="text-2xl md:text-4xl font-semibold primary">
-          AllMovies
+          All Movies
         </div>
 
         <form
@@ -82,24 +98,32 @@ const AllMovies = () => {
           </button>
         </form>
       </div>
-
-      {movies.length === 0 && filterApplied ? (
-        <div className="w-full flex flex-col items-center justify-center py-20">
+      {loading ? (
+        <div className="w-full">
+          <LoadingSpinner />
+        </div>
+      ) : movies.length === 0 && filterApplied ? (
+        <div className="flex flex-col items-center py-20">
           <img
-            src="https://i.ibb.co.com/Jz8x8q4/no-data.png"
-            alt=""
-            className="w-60 opacity-70"
+            src={notFound}
+            alt="Empty"
+            className="w-32 md:w-60 h-32 md:h-60 "
           />
-          <p className="text-xl font-semibold mt-4 text-gray-500">
-            No movies match your filter.
+          <p className="text-gray-600 text-xl md:text-3xl">
+            No Movies Matches your Filter
           </p>
         </div>
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
-          {movies.map((movie, idx) => (
-            <AllMoviesCard key={idx} movie={movie} />
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          animate="show"
+          className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3"
+        >
+          {movies.map((movie) => (
+            <AllMoviesCard key={movie._id} movie={movie} />
           ))}
-        </div>
+        </motion.div>
       )}
     </section>
   );

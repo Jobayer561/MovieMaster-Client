@@ -21,7 +21,7 @@ const AddMovieForm = () => {
       country: e.target.country.value,
       addedBy: user?.email,
     };
-    fetch("http://localhost:3000/movies", {
+    fetch("https://b12-a10-movie-master-server.vercel.app/movies", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

@@ -23,13 +23,16 @@ const UpdatePage = () => {
       language: e.target.language.value,
       country: e.target.country.value,
     };
-    fetch(`http://localhost:3000/movies/update/${movie._id}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(formData),
-    })
+    fetch(
+      `https://b12-a10-movie-master-server.vercel.app/movies/update/${movie._id}`,
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         console.log(data);

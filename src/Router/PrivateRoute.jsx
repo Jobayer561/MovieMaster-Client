@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { Navigate, useLocation } from "react-router";
-import { ClimbingBoxLoader } from "react-spinners";
+import { CircleLoader } from "react-spinners";
 import { AuthContext } from "../Context/AuthContext";
 
 const PrivateRoute = ({ children }) => {
@@ -12,7 +12,7 @@ const PrivateRoute = ({ children }) => {
   if (loading) {
     return (
       <div className="h-[97vh] flex items-center justify-center">
-        <ClimbingBoxLoader color="#e74c3c" />
+        <CircleLoader color="#FF6B6B" />
       </div>
     );
   }
@@ -20,7 +20,6 @@ const PrivateRoute = ({ children }) => {
   if (!user) {
     return <Navigate to="/login" state={location.pathname} />;
   }
-
   return children;
 };
 

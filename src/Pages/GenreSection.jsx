@@ -11,7 +11,7 @@ const GenreSection = () => {
               <MdLocalMovies size={40} />
             </span>
 
-            <span className="text-orange-400">Browse by Genre</span>
+            <span className="primary">Browse by Genre</span>
           </div>
         </h2>
         <div className="flex flex-wrap justify-center gap-4">

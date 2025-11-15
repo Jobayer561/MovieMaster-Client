@@ -10,11 +10,13 @@ import PrivateRoute from "./PrivateRoute";
 import AddMovies from "../Pages/AddMovies";
 import UpdatePage from "../Pages/UpdatePage";
 import AddToWatchList from "../Pages/AddToWatchList";
+import ErrorPage from "../Pages/ErrorPage";
 
 export const router = createBrowserRouter([
   {
     path: "/",
     element: <MainLayout />,
+    errorElement: <ErrorPage />,
     children: [
       {
         path: "/",
@@ -23,7 +25,8 @@ export const router = createBrowserRouter([
       {
         path: "/allMovies",
         element: <AllMovies />,
-        loader: () => fetch("http://localhost:3000/movies"),
+        loader: () =>
+          fetch("https://b12-a10-movie-master-server.vercel.app/movies"),
       },
       {
         path: "/movie-details/:id",
@@ -65,14 +68,16 @@ export const router = createBrowserRouter([
           </PrivateRoute>
         ),
         loader: ({ params }) =>
-          fetch(`http://localhost:3000/movies/${params.id}`),
+          fetch(
+            `https://b12-a10-movie-master-server.vercel.app/movies/${params.id}`
+          ),
       },
       {
         path: "/myWatchList",
-        element:(
-           <PrivateRoute>
-            <AddToWatchList/>
-           </PrivateRoute>
+        element: (
+          <PrivateRoute>
+            <AddToWatchList />
+          </PrivateRoute>
         ),
       },
     ],

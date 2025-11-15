@@ -2,6 +2,7 @@ import React, { use, useEffect, useState } from "react";
 import WatchListCard from "./WatchListCard";
 import { AuthContext } from "../Context/AuthContext";
 import { Link } from "react-router";
+import LoadingSpinner from "./LoadingSpinner";
 
 const AddToWatchList = () => {
   const { user } = use(AuthContext);
@@ -9,11 +10,14 @@ const AddToWatchList = () => {
   const [loading, setLoading] = useState(true);
   const [refetch, setRefetch] = useState(false);
   useEffect(() => {
-    fetch(`http://localhost:3000/watchList?email=${user.email}`, {
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
+    fetch(
+      `https://b12-a10-movie-master-server.vercel.app/watchList?email=${user.email}`,
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         console.log(data.data);
@@ -22,18 +26,21 @@ const AddToWatchList = () => {
       });
   }, [user, refetch]);
   const removeMovie = (id) => {
-    fetch(`http://localhost:3000/watchList/${id}`, {
+    fetch(`https://b12-a10-movie-master-server.vercel.app/watchList/${id}`, {
       method: "DELETE",
     })
       .then((res) => res.json())
-      .then(() => setRefetch(!refetch)); 
+      .then(() => setRefetch(!refetch));
   };
 
   if (loading) {
-    return <div> Please wait ... Loading...</div>;
+    return <LoadingSpinner count={4} className="my-4" />;
   }
   return (
-    <div className="max-w-7xl mx-auto px-4 py-6">
+    <div className="max-w-7xl mx-auto h-[97vh] px-4 py-6">
+      <h3 className="text-3xl font-bold primary text-center mb-4">
+        My WatchList
+      </h3>
       {movies.length === 0 ? (
         <div className="flex flex-col items-center py-20">
           <img
@@ -41,7 +48,9 @@ const AddToWatchList = () => {
             alt="Empty"
             className="w-32 md:w-60 h-32 md:h-60 "
           />
-          <p className="mt-4 text-gray-600 text-xl md:text-3xl">Your watchlist is empty.</p>
+          <p className="mt-4 text-gray-600 text-xl md:text-3xl">
+            Your watchList is empty.
+          </p>
 
           <Link
             to="/allMovies"
@@ -51,7 +60,7 @@ const AddToWatchList = () => {
           </Link>
         </div>
       ) : (
-        <div className="grid grid-cols-3 lg:grid-cols-4 gap-3">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
           {movies.map((movie) => (
             <WatchListCard
               key={movie._id}

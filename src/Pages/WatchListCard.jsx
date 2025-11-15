@@ -17,9 +17,12 @@ const WatchListCard = ({ movie, removeMovie }) => {
       confirmButtonText: "Yes, remove it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:3000/watchList/${_id}`, {
-          method: "DELETE",
-        })
+        fetch(
+          `https://b12-a10-movie-master-server.vercel.app/watchList/${_id}`,
+          {
+            method: "DELETE",
+          }
+        )
           .then((res) => res.json())
           .then((data) => {
             if (data.success) {
@@ -37,7 +40,7 @@ const WatchListCard = ({ movie, removeMovie }) => {
     });
   };
   return (
-    <div className="max-w-7xl mx-auto">
+    <div className="max-w-7xl mx-auto min-h-screen">
       <div className="card border border-gray-200 hover:scale-105 transition-transform shadow-md">
         <figure className="h-52 md:h-64 overflow-hidden   rounded-t-md">
           <img
