@@ -119,7 +119,7 @@ const Login = () => {
 
           <button
             type="submit"
-            className="w-full py-3 rounded-full bg-linear-to-r from-red-500 to-orange-500 text-white font-semibold   shadow-lg hover:shadow-xl hover:scale-105 "
+            className="w-full py-3 rounded-full bg-linear-to-r from-[#ff512f] to-[#dd2476] text-white font-semibold   shadow-lg hover:shadow-xl hover:scale-105 "
           >
             Login
           </button>
@@ -133,7 +133,7 @@ const Login = () => {
           <div className="flex justify-center gap-4">
             <button
               onClick={handleGoogleSignin}
-              className="btn bg-linear-to-r from-red-500 to-orange-500  w-full h-12 shadow-lg hover:shadow-xl  rounded-full hover:scale-105 transition-transform  text-white "
+              className="btn bg-linear-to-r from-[#ff512f] to-[#dd2476]  w-full h-12 shadow-lg hover:shadow-xl  rounded-full hover:scale-105 transition-transform  text-white "
             >
               <svg
                 aria-label="Google logo"

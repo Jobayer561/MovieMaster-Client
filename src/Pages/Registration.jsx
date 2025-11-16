@@ -186,7 +186,7 @@ const Registration = () => {
           </div>
           <button
             type="submit"
-            className="w-full mt-3 py-3 rounded-full bg-linear-to-r from-red-500 to-orange-500 text-white font-semibold   shadow-lg hover:shadow-xl hover:scale-105 "
+            className="w-full mt-3 py-3 rounded-full bg-linear-to-r from-[#ff512f] to-[#dd2476] text-white font-semibold   shadow-lg hover:shadow-xl hover:scale-105 "
           >
             Register
           </button>
@@ -198,7 +198,7 @@ const Registration = () => {
           <div className="flex justify-center gap-4">
             <button
               onClick={handleGoogleSignin}
-              className="btn border-none w-full h-12 shadow-lg hover:shadow-xl  rounded-full hover:scale-105 transition-transform  bg-linear-to-r from-red-500 to-orange-500 text-white "
+              className="btn border-none w-full h-12 shadow-lg hover:shadow-xl  rounded-full hover:scale-105 transition-transform  bg-linear-to-r from-[#ff512f] to-[#dd2476] text-white "
             >
               <svg
                 aria-label="Google logo"
@@ -208,7 +208,7 @@ const Registration = () => {
                 viewBox="0 0 512 512"
               >
                 <g>
-                  <path d="m0 0H512V512H0" fill=""></path>
+                  <path d="m0 0H512V512H0" fill="#fff"></path>
                   <path
                     fill="#34a853"
                     d="M153 292c30 82 118 95 171 60h62v48A192 192 0 0190 341"
