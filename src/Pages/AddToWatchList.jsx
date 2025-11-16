@@ -32,16 +32,15 @@ const AddToWatchList = () => {
       .then((res) => res.json())
       .then(() => setRefetch(!refetch));
   };
-
-  if (loading) {
-    return <LoadingSpinner count={4} className="my-4" />;
-  }
   return (
-    <div className="max-w-7xl mx-auto h-[97vh] px-4 py-6">
+    <div className="max-w-7xl mx-auto px-4 py-6">
       <h3 className="text-3xl font-bold primary text-center mb-4">
         My WatchList
       </h3>
-      {movies.length === 0 ? (
+
+      {loading ? (
+        <LoadingSpinner count={4} className="my-4" />
+      ) : movies.length === 0 ? (
         <div className="flex flex-col items-center py-20">
           <img
             src="https://cdn-icons-png.flaticon.com/512/4076/4076549.png"
@@ -54,7 +53,7 @@ const AddToWatchList = () => {
 
           <Link
             to="/movies"
-            className="btn text-white bg-linear-to-r from-[#ff512f] to-[#dd2476] hover:scale-105 transition-transform  mt-4 rounded-full"
+            className="btn text-white bg-linear-to-r from-[#ff512f] to-[#dd2476] hover:scale-105 transition-transform mt-4 rounded-full"
           >
             Browse Movies
           </Link>

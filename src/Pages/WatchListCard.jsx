@@ -40,7 +40,7 @@ const WatchListCard = ({ movie, removeMovie }) => {
     });
   };
   return (
-    <div className="max-w-7xl mx-auto min-h-screen">
+    <div className="max-w-7xl mx-auto ">
       <div className="card border border-gray-200 hover:scale-105 transition-transform shadow-md">
         <figure className="h-52 md:h-64 overflow-hidden   rounded-t-md">
           <img

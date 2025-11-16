@@ -24,9 +24,9 @@ const Login = () => {
         console.log(res);
         setUser(res.user);
         toast.dismiss();
+        navigate(from);
         toast.success("Signin successful");
         e.target.reset();
-        navigate(from);
       })
       .catch((err) => {
         console.log(err);
@@ -56,8 +56,8 @@ const Login = () => {
             console.log("User saved in DB", data);
             setUser(result.user);
             toast.dismiss();
-            toast.success("Google Sign-in successful");
             navigate(from);
+            toast.success("Google Sign-in successful");
             setLoading(false);
           });
       })
