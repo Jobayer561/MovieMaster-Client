@@ -6,9 +6,10 @@ import { AuthContext } from "../Context/AuthContext";
 import Swal from "sweetalert2";
 import toast from "react-hot-toast";
 import { CircleLoader } from "react-spinners";
+import MovieError from "./MovieError";
 const MovieDetails = () => {
   const { id } = useParams();
-  const [movie, setMovie] = useState({});
+  const [movie, setMovie] = useState(null);
   const [loading, setLoading] = useState(true);
 
   const { user } = use(AuthContext);
@@ -17,7 +18,16 @@ const MovieDetails = () => {
     fetch(`https://b12-a10-movie-master-server.vercel.app/movies/${id}`)
       .then((res) => res.json())
       .then((data) => {
-        setMovie(data.result);
+        if (!data.result) {
+          setMovie(null);
+        } else {
+          setMovie(data.result);
+        }
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.log(err);
+        setMovie(null);
         setLoading(false);
       });
   }, [id]);
@@ -101,7 +111,9 @@ const MovieDetails = () => {
       </div>
     );
   }
-
+  if (!loading && !movie) {
+    return <MovieError />;
+  }
   return (
     <div className="">
       <div className="max-w-[1440px]  mx-auto px-4 py-8  text-gray-950 ">
@@ -163,15 +175,16 @@ const MovieDetails = () => {
                 {movie?.addedBy}
               </p>
             </div>
-            <div className="mt-4">
-              <button
-                onClick={handleAddToWatchList}
-                className="block w-full text-center py-3 font-semibold text-white rounded-full bg-linear-to-r from-[#ff512f] to-[#dd2476] hover:scale-105 transition-transform"
-                to="/myWatchList"
-              >
-                Add To WatchList
-              </button>
-            </div>
+            {user && (
+              <div className="mt-4">
+                <button
+                  onClick={handleAddToWatchList}
+                  className="block w-full text-center py-3 font-semibold text-white rounded-full bg-linear-to-r from-[#ff512f] to-[#dd2476] hover:scale-105 transition-transform"
+                >
+                  Add To WatchList
+                </button>
+              </div>
+            )}
 
             {user?.email === movie?.addedBy && (
               <div className="mt-6 flex justify-center gap-4">

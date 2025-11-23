@@ -123,7 +123,7 @@ const Registration = () => {
       className=" px-4 flex justify-center items-center  
  animate-gradient"
     >
-      <div className="/90 w-[450px] p-6 rounded-2xl shadow-2xl my-4  border border-white/20">
+      <div className=" w-[450px] p-6 rounded-2xl shadow-2xl my-4  border border-white/20">
         <div className="text-center mb-3">
           <h1 className="text-2xl font-bold mt-2 primary">Register</h1>
         </div>

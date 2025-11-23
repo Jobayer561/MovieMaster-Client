@@ -40,7 +40,7 @@ const FeaturedMovies = ({ movie }) => {
 
         <motion.p
           variants={item}
-          className="text-xl sm:text-2xl text-shadow-gray-50 md:text-4xl"
+          className="text-[16px] sm:text-2xl text-shadow-gray-50 md:text-4xl"
         >
           {plotSummary}
         </motion.p>
