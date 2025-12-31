@@ -125,6 +125,6 @@ Make sure you have installed:
 
 ```bash
 git clone https://github.com/Jobayer561/MovieMaster-Client.git
-cd MovieMaster-Client
+cd frontend
 npm install
 npm run dev
