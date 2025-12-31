@@ -1,6 +1,6 @@
 # 🎬 MovieMaster — Discover, Explore & Track Your Favorite Movies
 
-![MovieMaster Banner](assets/banner.png)
+![MovieMaster Banner](./src/assets//DemoImage.png)
 
 ---
 
