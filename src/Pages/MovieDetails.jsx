@@ -2,11 +2,24 @@ import React, { use, useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router";
 import { LiaEditSolid } from "react-icons/lia";
 import { MdDelete } from "react-icons/md";
+import {
+  FaStar,
+  FaClock,
+  FaGlobe,
+  FaCalendarAlt,
+  FaFilm,
+  FaUser,
+  FaTheaterMasks,
+  FaFlag,
+  FaHeart,
+} from "react-icons/fa";
 import { AuthContext } from "../Context/AuthContext";
 import Swal from "sweetalert2";
 import toast from "react-hot-toast";
 import { CircleLoader } from "react-spinners";
 import MovieError from "./MovieError";
+import { motion } from "framer-motion";
+
 const MovieDetails = () => {
   const { id } = useParams();
   const [movie, setMovie] = useState(null);
@@ -115,97 +128,190 @@ const MovieDetails = () => {
     return <MovieError />;
   }
   return (
-    <div className="">
-      <div className="max-w-[1440px]  mx-auto px-4 py-8  text-gray-950 ">
-        <div className="w-full max-w-6xl mx-auto flex flex-col lg:flex-row gap-8 rounded-2xl p-2 overflow-hidden shadow-2xl">
-          <div className="lg:w-1/2">
-            <img
-              src={movie?.posterUrl}
-              alt={movie?.title}
-              className="w-full h-[45vh] sm:h-[55vh] md:h-[70vh] lg:h-[80vh] object-cover object-center rounded-2xl"
-            />
-          </div>
+    <div className="min-h-screen py-8 px-4">
+      <div className="max-w-[1440px] mx-auto">
+        <motion.div
+          className="bg-base-100 rounded-3xl overflow-hidden shadow-2xl border border-gray-200/50"
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+        >
+          <div className="grid lg:grid-cols-2 gap-0">
+            <motion.div
+              className="relative group"
+              initial={{ opacity: 0, x: -30 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+            >
+              <div className="relative h-[500px] lg:h-full overflow-hidden">
+                <img
+                  src={movie?.posterUrl}
+                  alt={movie?.title}
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                />
+                <div className="absolute inset-0 bg-linear-to-t from-black/80 via-black/20 to-transparent lg:bg-linear-to-r lg:from-transparent lg:via-black/10 lg:to-black/50"></div>
 
-          <div className="lg:w-1/2 mt-8 lg:mt-0 rounded-2xl p-6">
-            <h1 className="text-3xl md:text-5xl font-bold text-center primary mb-4 animate-pulse">
-              {movie?.title}
-            </h1>
+                <div className="absolute top-6 left-6">
+                  <div className="flex items-center gap-2 bg-linear-to-r from-yellow-400 to-orange-500 text-white px-6 py-2 rounded-full shadow-xl font-bold">
+                    <FaStar className="text-xl" />
+                    <span className="text-lg">{movie?.rating}</span>
+                  </div>
+                </div>
 
-            <p className="text-cyan-400 text-center text-xl font-semibold max-w-3xl mx-auto mb-8">
-              {movie?.plotSummary}
-            </p>
-
-            <div className="grid sm:grid-cols-2 gap-6 font-semibold text-amber-700/80">
-              <p>
-                <span className="font-bold text-indigo-500">Genre :</span>{" "}
-                {movie?.genre}
-              </p>
-              <p>
-                <span className="font-bold text-indigo-500">
-                  Release Year :{" "}
-                </span>{" "}
-                {movie?.releaseYear}
-              </p>
-              <p>
-                <span className="font-bold text-indigo-500">Director : </span>{" "}
-                {movie?.director}
-              </p>
-              <p>
-                <span className="font-bold text-indigo-500">Duration : </span>{" "}
-                {movie?.duration} mins
-              </p>
-              <p>
-                <span className="font-bold text-indigo-500">Rating : </span> ⭐{" "}
-                {movie?.rating}
-              </p>
-              <p>
-                <span className="font-bold text-indigo-500">Language : </span>{" "}
-                {movie?.language}
-              </p>
-              <p>
-                <span className="font-bold text-indigo-500">Country : </span>{" "}
-                {movie?.country}
-              </p>
-              <p className="sm:col-span-2">
-                <span className="font-bold text-indigo-500">Cast : </span>{" "}
-                {movie?.cast}
-              </p>
-              <p className="sm:col-span-2 font-semibold">
-                <span className="font-bold text-indigo-500">Added by : </span>{" "}
-                {movie?.addedBy}
-              </p>
-            </div>
-            {user && (
-              <div className="mt-4">
-                <button
-                  onClick={handleAddToWatchList}
-                  className="block w-full text-center py-3 font-semibold text-white rounded-full bg-linear-to-r from-[#ff512f] to-[#dd2476] hover:scale-105 transition-transform"
-                >
-                  Add To WatchList
-                </button>
+                <div className="absolute top-6 right-6">
+                  <div className="flex items-center gap-2 bg-linear-to-r from-[#7928CA] to-[#FF0080] text-white px-6 py-3 rounded-full shadow-xl font-bold">
+                    <FaFilm />
+                    <span>{movie?.genre}</span>
+                  </div>
+                </div>
               </div>
-            )}
+            </motion.div>
 
-            {user?.email === movie?.addedBy && (
-              <div className="mt-6 flex justify-center gap-4">
-                <Link
-                  to={`/movies/update/${movie._id} `}
-                  className="btn text-white bg-linear-to-r from-[#ff512f] to-[#dd2476] hover:scale-105 transition-transform rounded-full"
-                >
-                  <LiaEditSolid className="text-xl" />
-                  Edit
-                </Link>
-                <button
-                  onClick={handleDelete}
-                  className="btn text-white bg-linear-to-r from-[#ff512f] to-[#dd2476] hover:scale-105 transition-transform rounded-full"
-                >
-                  <MdDelete className="text-xl" />
-                  Delete
-                </button>
+            <motion.div
+              className="p-8 lg:p-12 flex flex-col justify-center"
+              initial={{ opacity: 0, x: 30 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+            >
+              <h1 className="text-4xl lg:text-5xl font-extrabold mb-4 primary leading-tight">
+                {movie?.title}
+              </h1>
+
+              <p className="text-gray-500 text-lg leading-relaxed mb-8">
+                {movie?.plotSummary}
+              </p>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
+                <div className="flex items-center gap-3 p-3 bg-linear-to-r from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20 rounded-xl">
+                  <div className="p-2 bg-blue-500 rounded-lg">
+                    <FaCalendarAlt className="text-white text-lg" />
+                  </div>
+                  <div>
+                    <p className="text-xs text-gray-500 uppercase font-semibold">
+                      Year
+                    </p>
+                    <p className="font-bold text-gray-900 dark:text-white">
+                      {movie?.releaseYear}
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex items-center gap-3 p-3 bg-linear-to-r from-purple-50 to-pink-50 dark:from-purple-900/20 dark:to-pink-900/20 rounded-xl">
+                  <div className="p-2 bg-purple-500 rounded-lg">
+                    <FaClock className="text-white text-lg" />
+                  </div>
+                  <div>
+                    <p className="text-xs text-gray-500 uppercase font-semibold">
+                      Duration
+                    </p>
+                    <p className="font-bold text-gray-900 dark:text-white">
+                      {movie?.duration} mins
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex items-center gap-3 p-3 bg-linear-to-r from-green-50 to-teal-50 dark:from-green-900/20 dark:to-teal-900/20 rounded-xl">
+                  <div className="p-2 bg-green-500 rounded-lg">
+                    <FaGlobe className="text-white text-lg" />
+                  </div>
+                  <div>
+                    <p className="text-xs text-gray-500 uppercase font-semibold">
+                      Language
+                    </p>
+                    <p className="font-bold text-gray-900 dark:text-white">
+                      {movie?.language}
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex items-center gap-3 p-3 bg-linear-to-r from-red-50 to-orange-50 dark:from-red-900/20 dark:to-orange-900/20 rounded-xl">
+                  <div className="p-2 bg-red-500 rounded-lg">
+                    <FaFlag className="text-white text-lg" />
+                  </div>
+                  <div>
+                    <p className="text-xs text-gray-500 uppercase font-semibold">
+                      Country
+                    </p>
+                    <p className="font-bold text-gray-900 dark:text-white">
+                      {movie?.country}
+                    </p>
+                  </div>
+                </div>
               </div>
-            )}
+
+              <div className="space-y-3 mb-8">
+                <div className="flex items-start gap-3 p-4 bg-linear-to-r from-indigo-50 to-purple-50 dark:from-indigo-900/20 dark:to-purple-900/20 rounded-xl">
+                  <FaTheaterMasks className="text-indigo-500 text-xl mt-1" />
+                  <div className="flex-1">
+                    <p className="text-xs text-gray-500 uppercase font-semibold mb-1">
+                      Director
+                    </p>
+                    <p className="font-bold text-gray-900 dark:text-white">
+                      {movie?.director}
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-3 p-4 bg-linear-to-r from-pink-50 to-rose-50 dark:from-pink-900/20 dark:to-rose-900/20 rounded-xl">
+                  <FaUser className="text-pink-500 text-xl mt-1" />
+                  <div className="flex-1">
+                    <p className="text-xs text-gray-500 uppercase font-semibold mb-1">
+                      Cast
+                    </p>
+                    <p className="font-bold text-gray-900 dark:text-white">
+                      {movie?.cast}
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-3 p-4 bg-linear-to-r from-gray-50 to-slate-50 dark:from-gray-900/20 dark:to-slate-900/20 rounded-xl">
+                  <FaUser className="text-gray-500 text-xl mt-1" />
+                  <div className="flex-1">
+                    <p className="text-xs text-gray-500 uppercase font-semibold mb-1">
+                      Added By
+                    </p>
+                    <p className="font-bold text-gray-900 dark:text-white">
+                      {movie?.addedBy}
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="space-y-4">
+                {user && (
+                  <motion.button
+                    onClick={handleAddToWatchList}
+                    className="w-full py-3 px-4 text-white font-bold text-lg bg-linear-to-r from-[#ff512f] to-[#dd2476] rounded-full shadow-lg  transition-all duration-300 flex items-center justify-center gap-3 group"
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                  >
+                    <FaHeart className="text-xl group-hover:scale-125 transition-transform duration-300" />
+                    Add To WatchList
+                  </motion.button>
+                )}
+
+                {user?.email === movie?.addedBy && (
+                  <div className="flex gap-4">
+                    <Link
+                      to={`/movies/update/${movie._id}`}
+                      className="flex-1 btn text-white bg-linear-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700 border-0 rounded-full shadow-lg hover:scale-105 transition-all duration-300 gap-2"
+                    >
+                      <LiaEditSolid className="text-xl" />
+                      Edit Movie
+                    </Link>
+                    <button
+                      onClick={handleDelete}
+                      className="flex-1 btn text-white bg-linear-to-r from-red-500 to-pink-600 hover:from-red-600 hover:to-pink-700 border-0 rounded-full shadow-lg hover:scale-105 transition-all duration-300 gap-2"
+                    >
+                      <MdDelete className="text-xl" />
+                      Delete
+                    </button>
+                  </div>
+                )}
+              </div>
+            </motion.div>
           </div>
-        </div>
+        </motion.div>
       </div>
     </div>
   );

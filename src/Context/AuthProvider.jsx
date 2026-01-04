@@ -17,7 +17,7 @@ const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
 
   const createUser = (email, password) => {
-    setLoading(true)
+    setLoading(true);
     return createUserWithEmailAndPassword(auth, email, password);
   };
   const updateProfileFunc = (displayName, photoURL) => {
@@ -27,7 +27,7 @@ const AuthProvider = ({ children }) => {
     });
   };
   const LoginUser = (email, password) => {
-    setLoading(true)
+    setLoading(true);
     return signInWithEmailAndPassword(auth, email, password);
   };
   const signOutUser = () => {
@@ -38,7 +38,6 @@ const AuthProvider = ({ children }) => {
     setLoading(true);
     return signInWithPopup(auth, googleProvider);
   };
-
 
   const authInfo = {
     createUser,
@@ -52,16 +51,18 @@ const AuthProvider = ({ children }) => {
     setLoading,
   };
 
-    useEffect(() => {
-      const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
-        setUser(currentUser);
-        setLoading(false);
-      });
-      return () => {
-        unSubscribe();
-      };
-    }, []);
-  return <AuthContext value={authInfo}>{children}</AuthContext>;
+  useEffect(() => {
+    const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser);
+      setLoading(false);
+    });
+    return () => {
+      unSubscribe();
+    };
+  }, []);
+  return (
+    <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>
+  );
 };
 
 export default AuthProvider;

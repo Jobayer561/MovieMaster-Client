@@ -41,26 +41,22 @@ const LatestMovies = () => {
 
   return (
     <div>
-      <div className="max-w-7xl mx-auto px-4 py-6">
-        <div className="font-bold text-2xl md:text-3xl  primary">Latest Movies</div>
+      <div className="max-w-[1440px] mx-auto px-4 py-6">
+        <h2 className="text-2xl md:text-3xl font-bold primary mb-2">
+          Latest Movies
+        </h2>
+        <div className="h-1 w-24 bg-linear-to-r from-[#ff512f] to-[#dd2476] rounded-full mb-6"></div>
 
         {loading ? (
           <div className="mt-8">
             <LoadingSpinner count={6} />
           </div>
         ) : (
-          <motion.div
-            variants={containerVariants}
-            initial="hidden"
-            animate="show"
-            className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 mt-8"
-          >
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-6">
             {latestMovies.map((movie) => (
-              <motion.div key={movie._id} variants={cardVariants}>
-                <AllMoviesCard movie={movie} />
-              </motion.div>
+              <AllMoviesCard key={movie._id} movie={movie} />
             ))}
-          </motion.div>
+          </div>
         )}
       </div>
     </div>

@@ -33,7 +33,7 @@ const Carousel = () => {
       transition={{ duration: 0.8 }}
     >
       {loading ? (
-        <div className="max-w-7xl mx-auto h-[90vh] flex justify-center items-center">
+        <div className="max-w-[1440px] mx-auto h-[90vh] flex justify-center items-center">
           <CircleLoader size={80} color="#FF6B6B" />
         </div>
       ) : (

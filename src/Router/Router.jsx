@@ -11,6 +11,12 @@ import AddMovies from "../Pages/AddMovies";
 import UpdatePage from "../Pages/UpdatePage";
 import AddToWatchList from "../Pages/AddToWatchList";
 import ErrorPage from "../Pages/ErrorPage";
+import DashboardLayout from "../DashBoard/DashboardLayout";
+import Profile from "../DashBoard/Profile";
+import Statistics from "../DashBoard/Statistics";
+import UpdateProfile from "../DashBoard/UpdateProfile";
+import AboutUs from "../Pages/AboutUs";
+import ContactUs from "../Pages/ContactUs";
 
 export const router = createBrowserRouter([
   {
@@ -29,24 +35,16 @@ export const router = createBrowserRouter([
           fetch("https://b12-a10-movie-master-server.vercel.app/movies"),
       },
       {
+        path: "/about-us",
+        element: <AboutUs />,
+      },
+      {
+        path: "/contact-us",
+        element: <ContactUs />,
+      },
+      {
         path: "/movies/:id",
         element: <MovieDetails />,
-      },
-      {
-        path: "/movies/my-collection",
-        element: (
-          <PrivateRoute>
-            <MyCollections />
-          </PrivateRoute>
-        ),
-      },
-      {
-        path: "/movies/add",
-        element: (
-          <PrivateRoute>
-            <AddMovies />
-          </PrivateRoute>
-        ),
       },
       {
         path: "/register",
@@ -68,11 +66,58 @@ export const router = createBrowserRouter([
             `https://b12-a10-movie-master-server.vercel.app/movies/${params.id}`
           ),
       },
+    ],
+  },
+  {
+    path: "/dashboard",
+    element: <DashboardLayout />,
+
+    children: [
       {
-        path: "/myWatchList",
+        path: "",
+        element: (
+          <PrivateRoute>
+            <Statistics />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "my-collection",
+        element: (
+          <PrivateRoute>
+            <MyCollections />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "add-movies",
+        element: (
+          <PrivateRoute>
+            <AddMovies />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "watchlist",
         element: (
           <PrivateRoute>
             <AddToWatchList />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "profile",
+        element: (
+          <PrivateRoute>
+            <Profile />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "profile/edit",
+        element: (
+          <PrivateRoute>
+            <UpdateProfile />
           </PrivateRoute>
         ),
       },
