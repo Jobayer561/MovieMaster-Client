@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useLoaderData } from "react-router";
 import AllMoviesCard from "./AllMoviesCard";
 import { motion } from "framer-motion";
@@ -7,10 +7,10 @@ import notFound from "../assets/movie-not-found.webp";
 import {
   FaFilter,
   FaFilm,
-  FaStar,
   FaTimes,
   FaChevronLeft,
   FaChevronRight,
+  FaSearch,
 } from "react-icons/fa";
 
 const containerVariants = {
@@ -29,25 +29,24 @@ const AllMovies = () => {
   const [totalPages, setTotalPages] = useState(data.totalPages || 1);
   const [totalMovies, setTotalMovies] = useState(data.totalMovies || 0);
   const [selectedGenre, setSelectedGenre] = useState("");
-  const [minRating, setMinRating] = useState("");
-  const [maxRating, setMaxRating] = useState("");
+  const [searchTerm, setSearchTerm] = useState("");
   const [sortBy, setSortBy] = useState("duration-desc");
   const [loading, setLoading] = useState(false);
-  const filterApplied =
-    selectedGenre !== "" ||
-    minRating !== "" ||
-    maxRating !== "" ||
-    sortBy !== "duration-desc";
+  const filterApplied = selectedGenre !== "" || sortBy !== "duration-desc";
 
-  const fetchMovies = (page = 1) => {
+  const fetchMovies = (page = 1, overrideSearch) => {
     const [sortField, sortOrder] = sortBy.split("-");
+    const search = (overrideSearch ?? searchTerm).trim();
+
     let url = `https://b12-a10-movie-master-server.vercel.app/movies?page=${page}&limit=8&sortBy=${sortField}&sortOrder=${sortOrder}`;
 
     if (filterApplied) {
       url = `https://b12-a10-movie-master-server.vercel.app/moviesFilter?page=${page}&limit=8&sortBy=${sortField}&sortOrder=${sortOrder}`;
       if (selectedGenre) url += `&genre=${selectedGenre}`;
-      if (minRating) url += `&minRating=${minRating}`;
-      if (maxRating) url += `&maxRating=${maxRating}`;
+    }
+
+    if (search) {
+      url += `&search=${encodeURIComponent(search)}`;
     }
 
     setLoading(true);
@@ -82,11 +81,17 @@ const AllMovies = () => {
 
   const clearFilters = () => {
     setSelectedGenre("");
-    setMinRating("");
-    setMaxRating("");
     setSortBy("duration-desc");
     fetchMovies(1);
   };
+
+  useEffect(() => {
+    const id = setTimeout(() => {
+      setCurrentPage(1);
+      fetchMovies(1);
+    }, 350);
+    return () => clearTimeout(id);
+  }, [searchTerm]);
 
   const renderPageNumbers = () => {
     const pages = [];
@@ -157,8 +162,34 @@ const AllMovies = () => {
             <h2 className="text-xl font-bold primary">Filter Movies</h2>
           </div>
 
+          <div className="mb-4">
+            <label className="label pb-1">
+              <span className="label-text font-semibold flex items-center gap-2">
+                <FaSearch className="text-indigo-500" /> Search by Title
+              </span>
+            </label>
+            <div className="relative">
+              <input
+                type="text"
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                placeholder="Type to search..."
+                className="input input-bordered w-full pr-10 focus:outline-none focus:ring-2 focus:ring-[#dd2476]"
+              />
+              {searchTerm && (
+                <button
+                  type="button"
+                  onClick={() => setSearchTerm("")}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
+                >
+                  <FaTimes />
+                </button>
+              )}
+            </div>
+          </div>
+
           <form onSubmit={handleFilter} className="flex flex-col gap-4">
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="form-control">
                 <label className="label">
                   <span className="label-text font-semibold flex items-center gap-2">
@@ -185,44 +216,6 @@ const AllMovies = () => {
                   <option>Thriller</option>
                   <option>Other</option>
                 </select>
-              </div>
-
-              <div className="form-control">
-                <label className="label">
-                  <span className="label-text font-semibold flex items-center gap-2">
-                    <FaStar className="text-yellow-500" />
-                    Min Rating
-                  </span>
-                </label>
-                <input
-                  type="number"
-                  min="0"
-                  max="10"
-                  step="0.1"
-                  value={minRating}
-                  onChange={(e) => setMinRating(e.target.value)}
-                  className="input input-bordered w-full focus:outline-none focus:border-yellow-500 transition-all"
-                  placeholder="e.g., 7.0"
-                />
-              </div>
-
-              <div className="form-control">
-                <label className="label">
-                  <span className="label-text font-semibold flex items-center gap-2">
-                    <FaStar className="text-orange-500" />
-                    Max Rating
-                  </span>
-                </label>
-                <input
-                  type="number"
-                  min="0"
-                  max="10"
-                  step="0.1"
-                  value={maxRating}
-                  onChange={(e) => setMaxRating(e.target.value)}
-                  className="input input-bordered w-full focus:outline-none focus:border-orange-500 transition-all"
-                  placeholder="e.g., 10.0"
-                />
               </div>
 
               <div className="form-control">
@@ -281,18 +274,6 @@ const AllMovies = () => {
                     {selectedGenre}
                   </span>
                 )}
-                {minRating && (
-                  <span className="badge badge-lg bg-yellow-100 text-yellow-700 border-yellow-300 gap-2">
-                    <FaStar />
-                    Min: {minRating}
-                  </span>
-                )}
-                {maxRating && (
-                  <span className="badge badge-lg bg-orange-100 text-orange-700 border-orange-300 gap-2">
-                    <FaStar />
-                    Max: {maxRating}
-                  </span>
-                )}
                 {sortBy !== "duration-desc" && (
                   <span className="badge badge-lg bg-indigo-100 text-indigo-700 border-indigo-300 gap-2">
                     <FaFilter />
@@ -311,7 +292,7 @@ const AllMovies = () => {
         <div className="w-full py-20">
           <LoadingSpinner />
         </div>
-      ) : movies.length === 0 && filterApplied ? (
+      ) : movies.length === 0 && (filterApplied || searchTerm.trim()) ? (
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
